@@ -63,16 +63,17 @@ export default function RootLayout({
         </NavigationMenu>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="default" className="rounded-full">
-              Sign Up
-              <span className="sr-only">Toggle user menu</span>
+            <Button variant="default" className="rounded">
+              <Link href="/login" legacyBehavior passHref>Sign up</Link>
             </Button>
           </DropdownMenuTrigger>
         </DropdownMenu>
         </nav>
         </header>
+        <div>
         { children }
-        <footer className="py-6 md:px-8 md:py-0" style={{backgroundColor: "hsl(47.9, 95.8%, 53.1%)",}}>
+        </div>
+        <footer className="py-6 md:px-8 md:py-0">
           <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
             <p>Belajar Indo | Your website to learn Bahasa Indonesia</p>
           </div>

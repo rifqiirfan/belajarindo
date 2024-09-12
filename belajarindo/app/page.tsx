@@ -25,15 +25,15 @@ export default function Home() {
         />
       </div>
       <div className="flex items-center justify-center py-12">
-        <div className="mx-auto grid w-[350px] gap-6">
+        <div className="mx-auto grid w-[360px] gap-6">
           <div className="grid gap-6 text-center">
-            <h1 className="scroll-m-12 text-4xl text-blue-900 font-extrabold tracking-tight lg:text-5xl">Power up your Bahasa Indonesia skill with ease!</h1>
+            <h1 className="scroll-m-12 text-5xl text-blue-900 font-extrabold tracking-tight">Power up your Bahasa Indonesia skill with ease!</h1>
             
-            <Button variant="outline">
+            <Button variant="outline" size="lg">
               <Link href="/login" legacyBehavior passHref>I already had an account</Link>
             </Button>
             
-            <Button>
+            <Button variant="default" size="lg">
               <Link href="/signup" legacyBehavior passHref>Sign up</Link>
             </Button>
           </div>
@@ -42,20 +42,20 @@ export default function Home() {
       <div className="grid-cols-none">
         <Card x-chunk="dashboard-07-chunk-0">
           <CardHeader>
-            <CardTitle><h2 className="scroll-m-20 border-b pb-2 text-3xl font-bold tracking-tight first:mt-0">Why Belajar Indo?</h2></CardTitle>
+            <CardTitle className="text-3xl font-bold">Why Belajar Indo?</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-6">
               <div className="grid gap-3">
-                <p className="scroll-m-20 text-2xl font-semibold tracking-tight">Access from anywhere</p>
+                <p className="scroll-m-20 text-2xl font-semibold">Access from anywhere</p>
                 <p>Belajar Indo can be accessed even if you’re offline.</p>
               </div>
               <div className="grid gap-3">
-                <p className="scroll-m-20 text-2xl font-semibold tracking-tight">Works with any device</p>
+                <p className="scroll-m-20 text-2xl font-semibold">Works with any device</p>
                 <p>Whether on your laptop, smartphone, or tablet, you can enjoy Belajar Indo.</p>
               </div>
               <div className="grid gap-3">
-                <p className="scroll-m-20 text-2xl font-semibold tracking-tight">It&apos;s free</p>
+                <p className="scroll-m-20 text-2xl font-semibold">It&apos;s free</p>
                 <p>While we are developing, Belajar Indo will cost zero money.</p>
               </div>
             </div>

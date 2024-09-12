@@ -41,10 +41,10 @@ export default function LoginForm() {
                 </div>
                 <Input id="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full" size="default">
                 Login
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full" size="default">
                 Login with Google
               </Button>
             </div>
