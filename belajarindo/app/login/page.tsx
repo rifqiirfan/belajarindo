@@ -1,4 +1,4 @@
-import Link from "next/link"
+import * as React from "react"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -7,8 +7,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+// import {
+//   Form,
+//   FormControl,
+//   FormDescription,
+//   FormField,
+//   FormItem,
+//   FormLabel,
+//   FormMessage,
+// } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Link from "next/link"
+// import { useForm } from "react-hook-form"
+// import { zodResolver } from "@hookform/resolvers/zod"
+// import { z } from "zod"
+
 export const description =
   "A login form with email and password. There's an option to login with Google and a link to sign up if you don't have an account."
 
@@ -28,7 +42,7 @@ export default function LoginForm() {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="Type your email address"
                   required
                 />
               </div>
@@ -39,7 +53,11 @@ export default function LoginForm() {
                     Forgot your password?
                   </Link>
                 </div>
-                <Input id="password" type="password" required />
+                <Input 
+                  id="password" 
+                  type="password"
+                  placeholder="Type your password"
+                  required />
               </div>
               <Button type="submit" className="w-full" size="default">
                 Login
