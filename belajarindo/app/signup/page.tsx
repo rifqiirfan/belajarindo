@@ -11,17 +11,26 @@
 // import { Label } from "@/components/ui/label"
 // import Link from "next/link"
 
-// export default function LoginForm() {
+// export default function SignupForm() {
 //   return (
 //     <Card className="mx-auto max-w-sm">
 //       <CardHeader>
-//         <CardTitle className="text-2xl">Login</CardTitle>
+//         <CardTitle className="text-2xl">Sign Up</CardTitle>
 //         <CardDescription>
-//           Enter your email below to login to your account
+//           Create an account by filling the information below
 //         </CardDescription>
 //       </CardHeader>
 //       <CardContent>
 //         <div className="grid gap-4">
+//           <div className="grid gap-2">
+//             <Label htmlFor="name">Name</Label>
+//             <Input
+//               id="name"
+//               type="text"
+//               placeholder="Type your name"
+//               required
+//             />
+//           </div>
 //           <div className="grid gap-2">
 //             <Label htmlFor="email">Email</Label>
 //             <Input
@@ -32,29 +41,21 @@
 //             />
 //           </div>
 //           <div className="grid gap-2">
-//             <div className="flex items-center">
-//               <Label htmlFor="password">Password</Label>
-//               <Link href="#" className="ml-auto inline-block text-sm underline">
-//                 Forgot your password?
-//               </Link>
-//             </div>
+//             <Label htmlFor="password">Password</Label>
 //             <Input 
 //               id="password" 
 //               type="password"
-//               placeholder="Type your password"
+//               placeholder="Create a password"
 //               required />
 //           </div>
 //           <Button type="submit" className="w-full" size="default">
-//             Login
-//           </Button>
-//           <Button variant="outline" className="w-full" size="default">
-//             Login with Google
+//             Sign Up
 //           </Button>
 //         </div>
 //         <div className="mt-4 text-center text-sm">
-//           Don&apos;t have an account?{" "}
-//           <Link href="/signup" className="underline">
-//             Sign up
+//           Already have an account?{" "}
+//           <Link href="/login" className="underline">
+//             Login
 //           </Link>
 //         </div>
 //       </CardContent>
@@ -84,25 +85,27 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import Link from "next/link"
 
-
-const loginSchema = z.object({
+const registerSchema = z.object({
+  name: z.string().min(2, { message: "Nama minimal 2 karakter" }),
   email: z.string().email({ message: "Email tidak valid" }),
-  password: z.string().min(8, { message: "Password minimal 8 karakter" }),
+  password: z
+    .string()
+    .min(8, { message: "Password minimal 8 karakter" }),
 });
 
-export default function LoginPage() {
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+export default function RegisterPage() {
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (data: z.infer<typeof loginSchema>) => {
-    // TODO: Implementasi logika login dengan data (email dan password)
+  const onSubmit = (data: z.infer<typeof registerSchema>) => {
+    // TODO: Implementasi logika registrasi dengan data (nama, email, dan password)
     console.log(data);
   };
 
@@ -110,14 +113,27 @@ export default function LoginPage() {
     <div className="flex min-h-screen flex-col items-center justify-center">
       <Card>
         <CardHeader>
-          <CardTitle>Login</CardTitle>
+          <CardTitle>Register</CardTitle>
           <CardDescription>
-            Masuk ke akun Anda untuk mulai belajar.
+            Buat akun baru untuk mulai belajar.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nama</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Nama Lengkap" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="email"
@@ -148,15 +164,8 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
-              <Button className="w-full" type="submit">Login</Button>
-              <Button variant="outline" className="w-full" size="default">
-                Login with Google
-              </Button>
+              <Button type="submit">Register</Button>
             </form>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-            <Link href="/signup" className="underline">Sign up</Link>
-            </div>
           </Form>
         </CardContent>
       </Card>
