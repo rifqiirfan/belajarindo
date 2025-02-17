@@ -5,19 +5,19 @@ import { nextRequestChain, transformResponse } from "@/core/utilities/fetchUtils
 import { ActionGetData, ActionGetListData, ActionResponse, GetData } from "@/core/types/response";
 import { revalidateTag } from "next/cache";
 import { getOnErrorDataResponse, getOnErrorDatatableResponse, getOnSuccessDataResponse, getOnSuccessDatatableResponse } from "@/lib/handling";
-import { AchievementsDataTypes } from "../models/achievement.model";
+import { AchievementUsersDataTypes } from "../models/user_achievements.model";
 
-const urls = `${BASE_URL()}/v1/asset_category`
-const TAGS = 'achievements';
+const urls = `${BASE_URL()}/v1/user_achievements`;
+const TAGS = 'achievement_users';
 
-export async function getAchievements({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<AchievementsDataTypes>>> {
+export async function getAchivementUsers({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<AchievementUsersDataTypes>>> {
   const r = nextRequestChain(`${urls}?${query?.toString()}`, {
     next: {
-      tags: ["v1/asset/categories"],
+      tags: ["v1/asset/customers"],
     }
   }).withAuth({ cache: false })
 
-  const payload = await transformResponse<GetData<AchievementsDataTypes>>(r.getWithFetch(), r.getRequestAndData())
+  const payload = await transformResponse<GetData<AchievementUsersDataTypes>>(r.getWithFetch(), r.getRequestAndData())
 
   if (!payload.success) {
     return getOnErrorDatatableResponse({ error: payload.error })
@@ -26,14 +26,14 @@ export async function getAchievements({ query }: { query?: URLSearchParams | str
   return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
 }
 
-export async function getAchievementById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<AchievementsDataTypes>, ActionGetData<{}>>> {
+export async function getAchivementUserById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<AchievementUsersDataTypes>, ActionGetData<{}>>> {
   const r = nextRequestChain(`${urls}/${id}?${query?.toString()}`, {
     next: {
-      tags: ["v1/asset/categories"],
+      tags: ["v1/asset/customers"],
     }
   }).withAuth({ cache: false })
 
-  const payload = await transformResponse<GetData<AchievementsDataTypes>>(r.getWithFetch(), r.getRequestAndData())
+  const payload = await transformResponse<GetData<AchievementUsersDataTypes>>(r.getWithFetch(), r.getRequestAndData())
 
   if (!payload.success) {
     return getOnErrorDataResponse({ error: payload.error })
@@ -42,38 +42,40 @@ export async function getAchievementById({ id, query }: { id: string, query?: UR
   return getOnSuccessDataResponse({ message: payload.message, data: payload.data?.rows[0] })
 }
 
-export async function createAchievement<T>({ data }: { data: T }): Promise<ActionResponse> {
+export async function createAchivementUser<T>({ data }: { data: T }): Promise<ActionResponse> {
   const r = nextRequestChain(`${urls}`, {
     method: "POST",
     body: JSON.stringify(data)
   }).withAuth()
 
-  const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
 
-  return payload;
+  const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
+  revalidateTag("v1/asset/customers")
+
+  return payload
 }
 
-export async function updateAchievement<T>({ data }: { data: T }): Promise<ActionResponse> {
+export async function updateAchivementUser<T>({ data }: { data: T }): Promise<ActionResponse> {
   const r = nextRequestChain(`${urls}`, {
     method: "PUT",
     body: JSON.stringify(data)
   }).withAuth()
 
-  const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
 
-  return payload;
+  const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
+  revalidateTag("v1/asset/customers")
+
+  return payload
 }
 
-export async function deleteAchievement({ id }: { id: string }): Promise<ActionResponse> {
+export async function deleteAchivementUser({ id }: { id: string }): Promise<ActionResponse> {
   const r = nextRequestChain(`${urls}`, {
     method: "DELETE",
     body: JSON.stringify({ id })
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData());
-  revalidateTag("v1/asset/categories");
 
+  revalidateTag("v1/asset/customers");
   return payload
 }

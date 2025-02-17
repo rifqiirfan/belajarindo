@@ -7,7 +7,7 @@ import { revalidateTag } from "next/cache";
 import { getOnErrorDataResponse, getOnErrorDatatableResponse, getOnSuccessDataResponse, getOnSuccessDatatableResponse } from "@/lib/handling";
 import { CoursesDataTypes } from "../models/course.model";
 
-const urls = `${BASE_URL()}/v1/asset_customer`;
+const urls = `${BASE_URL()}/v1/courses`;
 const TAGS = 'courses';
 
 export async function getCourses({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesDataTypes>>> {

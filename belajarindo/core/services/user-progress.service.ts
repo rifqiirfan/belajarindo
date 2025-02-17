@@ -7,13 +7,13 @@ import {revalidateTag} from "next/cache";
 import { getOnErrorDataResponse, getOnErrorDatatableResponse, getOnSuccessDataResponse, getOnSuccessDatatableResponse } from "@/lib/handling";
 import { ProgressUsersDataTypes } from "../models/user_progress.model";
 
-const urls = `${BASE_URL()}/v1/asset_category`;
+const urls = `${BASE_URL()}/v1/user_progresses`;
 const TAGS = 'progress_users';
 
 export async function getProgressUsers({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<ProgressUsersDataTypes>>> {
   const r = nextRequestChain(`${urls}?${query?.toString()}`, {
     next: {
-      tags: ["v1/asset/categories"],
+      tags: [TAGS],
     }
   }).withAuth({ cache: false })
 
@@ -29,7 +29,7 @@ export async function getProgressUsers({ query }: { query?: URLSearchParams | st
 export async function getProgressUserById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<ProgressUsersDataTypes>, ActionGetData<{}>>> {
   const r = nextRequestChain(`${urls}/${id}?${query?.toString()}`, {
     next: {
-      tags: ["v1/asset/categories"],
+      tags: [TAGS],
     }
   }).withAuth({ cache: false })
 
