@@ -15,7 +15,7 @@ enum Roles {
 type Payload = {
   id: string
   username: string
-  roles: string[]
+  roles: string
   full_name: string
   iat: number
   exp: number

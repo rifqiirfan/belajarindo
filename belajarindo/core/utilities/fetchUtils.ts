@@ -45,10 +45,10 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
   return actions;
 };
 
-async function getJwt() {
-  const jwt: { username?: string, roles?: string[] } = await validateToken(cookieStore.get("session")?.value || "").catch(() => ({}))
-  return jwt
-}
+// async function getJwt() {
+//   const jwt: { username?: string, roles?: string } = await validateToken(cookieStore.get("session")?.value || "").catch(() => ({}))
+//   return jwt
+// }
 
 // export async function generateLogMetadata({ request, body }: { request: NextRequest, body?: string }): Promise<LogMetadata> {
 //   const jwt = await getJwt()
