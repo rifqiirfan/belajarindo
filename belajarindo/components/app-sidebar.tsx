@@ -37,61 +37,76 @@ const data = {
       items: [
         {
           title: "Beginner BIPA 1",
-          url: "/course/beginner",
+          url: "/course/bipa-1",
         },
         {
           title: "Beginner BIPA 2",
-          url: "/course/beginner",
+          url: "/course/bipa-2",
         },
         {
           title: "Intermediate BIPA 3",
-          url: "/course/intermediate",
+          url: "/course/bipa-3",
         },
         {
           title: "Intermediate BIPA 4",
-          url: "/course/intermediate",
+          url: "/course/bipa-4",
         },
         {
           title: "Advancced BIPA 5",
-          url: "/course/advanced",
+          url: "/course/bipa-5",
         },
         {
           title: "Advancced BIPA 6-7",
-          url: "/course/advanced",
+          url: "/course/bipa-6",
         },
       ],
     },
   ],
   admin: [
     {
-      name: "User Management",
-      url: "/admin/user-management",
+      title: "User",
+      url: "/v1/users",
       icon: UserCog,
     },
     {
-      name: "Course Management",
-      url: "/admin/course-management",
+      title: "Course",
+      url: "/v1/courses",
+      icon: FileCog,
+    },
+    {
+      title: "Lesson",
+      url: "/v1/lessons",
+      icon: FileCog,
+    },
+    {
+      title: "Quiz",
+      url: "/v1/quizzes",
+      icon: FileCog,
+    },
+    {
+      title: "Achievement",
+      url: "/v1/achievements",
       icon: FileCog,
     },
   ],
   profile: [
     {
-      name: "Progress",
+      title: "Progress",
       url: "/dashboard/progress",
       icon: Pickaxe,
     },
     {
-      name: "Achievement",
+      title: "Achievement",
       url: "/dashboard/achievement",
       icon: Star,
     },
     {
-      name: "Statistics",
+      title: "Statistics",
       url: "/dashboard/statistics",
       icon: ChartLine,
     },
     {
-      name: "Profile",
+      title: "Profile",
       url: "/profile",
       icon: User,
     },
@@ -105,9 +120,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser user={data.user} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavAdmin admin={data.admin} />
-        <NavProfile profile={data.profile} />
+        <NavMain label="Course" items={data.navMain} />
+        <NavMain label="Admin" items={data.admin} />
+        <NavMain label="Users" items={data.profile} />
+
+        {/* <NavAdmin admin={data.admin} />
+        <NavProfile profile={data.profile} /> */}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
