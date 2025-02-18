@@ -1,0 +1,1 @@
+export type FormPageProps = { data?: Record<string, any>, type: string }

@@ -1,7 +1,6 @@
 import { cookies } from "next/headers";
 import { ActionResponse, GetResponse } from "@/core/types/response";
 import { NextRequest } from "next/server";
-import { validateToken } from "@/core/utilities/authUtils";
 
 const cookieStore = await cookies();
 
@@ -44,24 +43,6 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
 
   return actions;
 };
-
-// async function getJwt() {
-//   const jwt: { username?: string, roles?: string } = await validateToken(cookieStore.get("session")?.value || "").catch(() => ({}))
-//   return jwt
-// }
-
-// export async function generateLogMetadata({ request, body }: { request: NextRequest, body?: string }): Promise<LogMetadata> {
-//   const jwt = await getJwt()
-
-//   return {
-//     method: request.method,
-//     url: request.url,
-//     query: request.nextUrl.searchParams.toString(),
-//     body,
-//     username: jwt?.username,
-//     roles: jwt?.roles
-//   }
-// }
 
 export async function processResponse(promise: Promise<Response>, options: {}): Promise<ActionResponse<{ response: Response }, {}>> {
   try {
