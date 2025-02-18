@@ -31,7 +31,7 @@ export default function TextareaBasic<
               value={field.value || ""}
               required={false}
               disabled={disabled}
-              // error={error ? true : false}
+              error={error ? true : false}
               // error={!!error}
               rows={3}
             />

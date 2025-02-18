@@ -2,17 +2,17 @@ import { cookies } from "next/headers";
 import { ActionResponse, GetResponse } from "@/core/types/response";
 import { NextRequest } from "next/server";
 
-const cookieStore = await cookies();
+// const cookieStore = await cookies();
 
 export const nextRequestChain = (...args: ConstructorParameters<typeof NextRequest>) => {
   const [input, init = {}] = args
-
+  
   let initRequest: any = {
     ...init,
     headers: {
       "Access-Control-Allow-Origin": '*',
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${cookieStore.get("session")?.value}`,
+      // "Authorization": `Bearer ${Nex.get("session")?.value}`,
       ...(init.headers || {}),
     },
   }

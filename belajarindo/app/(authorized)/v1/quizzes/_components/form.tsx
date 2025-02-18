@@ -68,7 +68,7 @@ export default function FormQuizzes({ data, type }: FormPageProps) {
               onSelect={async ({ option }) => { }}
               queryOptions={{
                 queryKey: ["lesson_id"],
-                queryFn: async ({ search, value }) => {
+                queryFn: async ({ search }) => {
                   const query = sParamComboboxGeneral(search, "id,name");
                   const { data = [] } = await getLessons({ query });
                   return data.map((v) => ({
@@ -87,7 +87,7 @@ export default function FormQuizzes({ data, type }: FormPageProps) {
 
             <div className="flex gap-2">
               {type !== "detail" && <Button type="submit">Submit</Button>}
-              <Button type="button" variant={'outline'} asChild><Link href={'/v1/Quizzes'}>Back</Link></Button>
+              <Button type="button" variant={'outline'} asChild><Link href={'/v1/quizzes'}>Back</Link></Button>
             </div>
           </form>
         </Form>

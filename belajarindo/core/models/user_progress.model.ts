@@ -3,8 +3,8 @@ import { z } from "zod"
 import { baseModel } from "./base_model";
 
 const zProgressUsersSchemaDefault = z.object({
-  id: zFallbackUuid(),
-  lesson_id: zFallbackString(),
+  id: z.number(),
+  lesson_id: z.number(),
   lesson_start: zFallbackString(),
   completion_status: zFallbackString(),
   quiz_score: zFallbackString(),

@@ -13,7 +13,7 @@ const TAGS = 'courses';
 export async function getCourses({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesDataTypes>>> {
 	const r = nextRequestChain(`${urls}?${query?.toString()}`, {
 		next: {
-			tags: ["v1/asset/customers"],
+			tags: [TAGS],
 		}
 	}).withAuth({ cache: false })
 
@@ -29,7 +29,7 @@ export async function getCourses({ query }: { query?: URLSearchParams | string }
 export async function getCourseById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<CoursesDataTypes>, ActionGetData<{}>>> {
 	const r = nextRequestChain(`${urls}/${id}?${query?.toString()}`, {
 		next: {
-			tags: ["v1/asset/customers"],
+			tags: [TAGS],
 		}
 	}).withAuth({ cache: false })
 

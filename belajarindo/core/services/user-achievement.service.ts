@@ -13,7 +13,7 @@ const TAGS = 'achievement_users';
 export async function getAchivementUsers({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<AchievementUsersDataTypes>>> {
   const r = nextRequestChain(`${urls}?${query?.toString()}`, {
     next: {
-      tags: ["v1/asset/customers"],
+      tags: [TAGS],
     }
   }).withAuth({ cache: false })
 
@@ -29,7 +29,7 @@ export async function getAchivementUsers({ query }: { query?: URLSearchParams | 
 export async function getAchivementUserById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<AchievementUsersDataTypes>, ActionGetData<{}>>> {
   const r = nextRequestChain(`${urls}/${id}?${query?.toString()}`, {
     next: {
-      tags: ["v1/asset/customers"],
+      tags: [TAGS],
     }
   }).withAuth({ cache: false })
 

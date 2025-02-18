@@ -39,7 +39,7 @@ export default async function LessonsDatatable({ searchParams }: Omit<PageProps,
           search={<FilterRouter fields={PICK_FILTER()} placeholder={"Search..."} />}
           actions={
             <>
-              <Button asChild><Link href={"/v1/Lessons/create"}>Create</Link></Button>
+              <Button asChild><Link href={"/v1/lessons/create"}>Create</Link></Button>
             </>
           }
         />

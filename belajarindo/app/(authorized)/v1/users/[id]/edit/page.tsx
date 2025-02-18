@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({params}: { params: { id: string } }) {
-  const {id} = params
+  const {id} = await params
 
   const res = await getUserById({id})
 

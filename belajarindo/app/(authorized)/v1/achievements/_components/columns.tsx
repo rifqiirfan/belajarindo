@@ -19,7 +19,7 @@ export const columns: ColumnDef<AchievementsDataTypes>[] = [
       <SimpleAction
         detailUrl={`/v1/achievements/${row.original.id}`}
         editUrl={`/v1/achievements/${row.original.id}/edit`}
-        onDelete={() => deleteAchievement({ id: row.original.id })}
+        onDelete={() => deleteAchievement({ id: String(row.original.id) })}
       />
     ),
   }
