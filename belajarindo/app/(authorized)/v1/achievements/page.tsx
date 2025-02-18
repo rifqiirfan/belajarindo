@@ -19,7 +19,7 @@ export default async function Page({ searchParams }: PageProps) {
   return (
     <ProtectDefault role="org:admin">
       {/* <Large>Achievements</Large> */}
-      <Card>
+      <Card className="">
         <CardContent>
           <Suspense fallback={<SkeletonDatatable />}>
             <AchievementsDatatable searchParams={searchParams} />

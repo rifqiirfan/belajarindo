@@ -1,71 +1,31 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { Button } from "@/components/ui/button"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import Link from 'next/link'
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import {
-  Eye,
-  Pencil,
-  Trash2,
-} from 'lucide-react';
+import { Metadata } from "next";
+import { Suspense } from "react";
+import { PageProps } from "@/core/types/datatable";
+import { Card, CardContent } from "@/components/ui/card";
+import { SkeletonDatatable } from "@/components/composite/skeletons/datatable";
+import { ProtectDefault } from "@/components/composite/protects";
+import AchievementsDatatable from "./_components/datatable";
 
-export const metadata = {
-  title: 'Course Management | Belajar Indo',
+export const metadata: Metadata = {
+  title: "Course",
+  description: "Master Data Course"
 }
 
-export default function CourseManagement() {
+export const revalidate = 0
+
+export const dynamic = "force-dynamic"
+
+export default async function Page({ searchParams }: PageProps) {
   return (
-    <Table>
-      <TableCaption>A list of courses available.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Course ID</TableHead>
-          <TableHead>Course Name</TableHead>
-          <TableHead>Course Category</TableHead>
-          <TableHead>Description</TableHead>
-          <TableHead>Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">01</TableCell>
-          <TableCell>Introduction</TableCell>
-          <TableCell>Beginner BIPA 1</TableCell>
-          <TableCell>Type the description here</TableCell>
-          <TableCell>
-            <Button variant="outline" size="icon">
-              <Eye />
-            </Button>
-            <Button variant="default" size="icon">
-              <Pencil />
-            </Button>
-            <Button variant="destructive" size="icon">
-              <Trash2 />
-            </Button>
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <ProtectDefault role="org:admin">
+      {/* <Large>Courses</Large> */}
+      <Card className="">
+        <CardContent>
+          <Suspense fallback={<SkeletonDatatable />}>
+            <AchievementsDatatable searchParams={searchParams} />
+          </Suspense>
+        </CardContent>
+      </Card>
+    </ProtectDefault>
   )
 }

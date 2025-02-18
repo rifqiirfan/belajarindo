@@ -31,7 +31,8 @@ export default function TextareaBasic<
               value={field.value || ""}
               required={false}
               disabled={disabled}
-              error={!!error}
+              // error={error ? true : false}
+              // error={!!error}
               rows={3}
             />
           </FormControl>

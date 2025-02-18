@@ -1,6 +1,6 @@
 import { Pagination as PaginationUI, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import { useDatatableContext } from "@/components/composite/datatable";
 import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";

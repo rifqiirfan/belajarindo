@@ -9,10 +9,7 @@ import { AchievementsDataTypes } from "@/core/models/achievement.model";
 export const columns: ColumnDef<AchievementsDataTypes>[] = [
   generateSortableColumn("name"),
   generateSortableColumn("description"),
-  generateSortableColumn("address"),
-  generateSortableColumn("contact_person", ""),
-  generateSortableColumn("contact_email", "Contact Email"),
-  generateSortableColumn("phone_number", "Phone Number"),
+  generateSortableColumn("icon_url"),
   {
     id: "action",
     header: "Action",
@@ -20,8 +17,8 @@ export const columns: ColumnDef<AchievementsDataTypes>[] = [
     enableHiding: false,
     cell: ({ row }) => (
       <SimpleAction
-        detailUrl={`/v1/asset/customers/${row.original.id}`}
-        editUrl={`/v1/asset/customers/${row.original.id}/edit`}
+        detailUrl={`/v1/achievements/${row.original.id}`}
+        editUrl={`/v1/achievements/${row.original.id}/edit`}
         onDelete={() => deleteAchievement({ id: row.original.id })}
       />
     ),

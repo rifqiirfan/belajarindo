@@ -1,4 +1,4 @@
-import { Muted, Small } from "@/components/typography";
+// import { Muted, Small } from "@/components/typography";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -16,7 +16,7 @@ const RowPerPage = ({ className }: { className?: string }) => {
   return (
     <div className={cn("flex gap-2 items-center", className)}>
       {/* <Small>Rows per page</Small> */}
-      <Small>Rows</Small>
+      <div className="text-xs font-medium">Rows</div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="ml-auto px-3 h-8 w-[64px]">
@@ -42,43 +42,13 @@ const RowPerPage = ({ className }: { className?: string }) => {
   )
 }
 
-/* V.1 Version */
-const RowPerPageOldVersion = ({ className }: { className?: string }) => {
-  const table = useDatatableContext()
-  return (
-    <div className={cn("flex gap-2 items-center", className)}>
-      <Small>Rows per page</Small>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="ml-auto">
-            {table.getState().pagination.pageSize} <ChevronDown />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          {rows.map((row) => {
-            return (
-              <DropdownMenuCheckboxItem
-                key={row}
-                className="capitalize"
-                checked={row === table.getState().pagination.pageSize}
-                onCheckedChange={() => table.setPageSize(row)}
-              >
-                {row}
-              </DropdownMenuCheckboxItem>
-            )
-          })}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
-  )
-}
-
 const PageCount = () => {
   const table = useDatatableContext()
   return (
-    <Small>
-      Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
-    </Small>
+    // <Small>
+    //   Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+    // </Small>
+    <></>
   )
 }
 
@@ -90,9 +60,9 @@ const PageEntries = () => {
   const initialRowCount = table.getState().pagination.pageIndex * table.getState().pagination.pageSize
   return (
     <>
-      <Muted>
+      {/* <Muted>
         Showing {initialRowCount + 1} to {initialRowCount + table.getPaginationRowModel().rows.length} from {table.getRowCount()} row(s)
-      </Muted>
+      </Muted> */}
       {/*<Muted>*/}
       {/*    Showing {table.getPaginationRowModel().rows.length} of {table.getState().pagination.pageSize} from {table.getRowCount()}*/}
       {/*</Muted>*/}
@@ -103,9 +73,10 @@ const PageEntries = () => {
 const RowSelected = () => {
   const table = useDatatableContext()
   return (
-    <Muted>
-      {table.getSelectedRowModel().rows.length} of {table.getRowCount()} row(s) selected
-    </Muted>
+    // <Muted>
+    //   {table.getSelectedRowModel().rows.length} of {table.getRowCount()} row(s) selected
+    // </Muted>
+    <></>
   )
 }
 

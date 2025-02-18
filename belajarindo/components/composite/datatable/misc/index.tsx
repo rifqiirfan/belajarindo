@@ -10,10 +10,10 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import {Button} from "@/components/ui/button/button";
+import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
 import Link from "next/link";
-import {ActionResponse} from "@/types/response";
+import {ActionResponse} from "@/core/types/response";
 import {createContext, useContext} from "react";
 import {QueryKey, useQueryClient} from "@tanstack/react-query";
 

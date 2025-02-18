@@ -18,7 +18,7 @@ import {
 import {useQuery} from "@tanstack/react-query";
 import {SkeletonDatatable} from "@/components/fabrication/skeletons/datatable";
 import {ColumnFiltersOld} from "@/types/datatable";
-import {ActionGetListData, ActionResponse} from "@/types/response";
+import {ActionGetListData, ActionResponse} from "@/core/types/response";n
 import {queryFnResponseHandler} from "@/utilities/reactQueryUtils";
 
 type PickTableState = Pick<TableState, "pagination" | "rowSelection" | "sorting" | "columnVisibility" | "globalFilter">

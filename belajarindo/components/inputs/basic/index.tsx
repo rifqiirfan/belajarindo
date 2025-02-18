@@ -32,7 +32,7 @@ export default function InputBasic<
                             value={field.value || ""}
                             required={false}
                             disabled={disabled}
-                            error={!!error}
+                            error={error ? true : false}
                             placeholder={placeholder}
                         />
                     </FormControl>

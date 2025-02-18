@@ -36,10 +36,10 @@ export default async function AchievementsDatatable({ searchParams }: Omit<PageP
       />
       <DatatableWrapperRouter data={parsedData} columns={columns} rowCount={rowCount}>
         <SimpleDatatableTemplate
-          search={<FilterRouter fields={PICK_FILTER()} placeholder={"Search customer..."} />}
+          search={<FilterRouter fields={PICK_FILTER()} placeholder={"Search..."} />}
           actions={
             <>
-              <Button asChild><Link href={"/v1/asset/customers/create"}>Create</Link></Button>
+              <Button asChild><Link href={"/v1/achievements/create"}>Create</Link></Button>
             </>
           }
         />

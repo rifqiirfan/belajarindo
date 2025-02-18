@@ -5,6 +5,8 @@ import { z } from "zod"
 // import { ColumnFilters, ColumnFiltersOld, DatatableQueryParams } from "@/types/datatable";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
+import { transformFiltersOld, transformSortingOld } from "./datatableUtils";
+import { ColumnFiltersOld } from "../types/datatable";
 
 const zSetupConfig = (label: string) => {
 	const column = toCapitalizedWords(label);
@@ -131,21 +133,21 @@ export const zFieldEmail = (label: string) => {
 
 const uuidSchema = z.string().uuid();
 
-// function transformStringFieldsOld(input: string, search: string): ColumnFiltersOld {
-// 	const fields = input.split(',');
-// 	const { data: parsedSearch, success } = uuidSchema.safeParse(search);
+function transformStringFieldsOld(input: string, search: string): ColumnFiltersOld {
+	const fields = input.split(',');
+	const { data: parsedSearch, success } = uuidSchema.safeParse(search);
 
-// 	const filteredFields = success
-// 		? fields.filter(field => field.includes("id"))
-// 		: fields.filter(field => !field.includes("id"));
+	const filteredFields = success
+		? fields.filter(field => field.includes("id"))
+		: fields.filter(field => !field.includes("id"));
 
-// 	return filteredFields.map((field, i) => ({
-// 		id: field.trim(),
-// 		operator: success ? "=" : "ilike",
-// 		value: success ? parsedSearch : search,
-// 		condition: i === 0 ? 'and' : 'or',
-// 	}));
-// }
+	return filteredFields.map((field, i) => ({
+		id: field.trim(),
+		operator: success ? "=" : "ilike",
+		value: success ? parsedSearch : search,
+		condition: i === 0 ? 'and' : 'or',
+	}));
+}
 
 // export function sParamDatatable(options?: { page?: number, page_size?: number, fields?: string, filter: ColumnFiltersOld }) {
 // 	const obj = {
@@ -165,26 +167,26 @@ const uuidSchema = z.string().uuid();
 // 	return queryParams;
 // }
 
-// export function sParamComboboxGeneral(search: string, fields: string = 'id,name', options?: { filter: ColumnFiltersOld }) {
-// 	const obj = {
-// 		page: (1).toString(),
-// 		page_size: (100).toString(),
-// 		sort: JSON.stringify(transformSortingOld([])),
-// 		filter: JSON.stringify(transformFiltersOld([
-// 			...(options?.filter ?? []),
-// 			...transformStringFieldsOld(fields, search)
-// 		])),
-// 		fields: fields
-// 	}
+export function sParamComboboxGeneral(search: string, fields: string = 'id,name', options?: { filter: ColumnFiltersOld }) {
+	const obj = {
+		page: (1).toString(),
+		page_size: (100).toString(),
+		sort: JSON.stringify(transformSortingOld([])),
+		filter: JSON.stringify(transformFiltersOld([
+			...(options?.filter ?? []),
+			...transformStringFieldsOld(fields, search)
+		])),
+		fields: fields
+	}
 
-// 	console.log(obj.filter)
+	console.log(obj.filter)
 
-// 	const queryParams = Object.entries(obj)
-// 		.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-// 		.join('&');
+	const queryParams = Object.entries(obj)
+		.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+		.join('&');
 
-// 	return queryParams;
-// }
+	return queryParams;
+}
 
 // export function sParamComboboxByGroup({ q = "", pagination = { pageIndex: 0, pageSize: 100 }, columnFilters = [], columnVisibility = { id: true, name: true } }: Partial<Omit<DatatableQueryParams, "sorting">>) {
 // 	const fields = Object.keys(columnVisibility)

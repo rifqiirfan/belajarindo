@@ -20,16 +20,16 @@ export const transformFiltersOld = (columnFilters: ColumnFiltersOld) => {
 }
 
 export const transformQueryOld = (query: DatatableQueryParamsOld, keys: string[] = []) => {
-  const generalSearch: ColumnFiltersOld = query.q
-    ? keys.map((k, i) => ({ id: k, value: query.q || "", operator: "ilike", condition: i === 0 ? "and" : "or" }))
+  const generalSearch: ColumnFiltersOld = query?.q ?
+    keys.map((k, i) => ({ id: k, value: query.q || "", operator: "ilike", condition: i === 0 ? "and" : "or" }))
     : []
 
   const obj = {
-    page: ((query.pagination?.pageIndex ?? 0) + 1).toString(),
-    page_size: query.pagination?.pageSize.toString() || "10",
-    sort: JSON.stringify(transformSortingOld(query.sorting || [])),
+    page: ((query?.pagination?.pageIndex ?? 0) + 1).toString(),
+    page_size: query?.pagination?.pageSize.toString() || "10",
+    sort: JSON.stringify(transformSortingOld(query?.sorting || [])),
     filter: JSON.stringify(transformFiltersOld([
-      ...(query.columnFilters || []),
+      ...(query?.columnFilters || []),
       ...generalSearch,
     ])),
   }
@@ -73,6 +73,6 @@ export const transformQuery = (query: Partial<DatatableQueryParams>, keys: strin
       }
     ])),
   }
-  
+
   return new URLSearchParams(obj)
 }

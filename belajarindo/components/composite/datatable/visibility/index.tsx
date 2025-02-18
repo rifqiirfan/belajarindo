@@ -4,7 +4,7 @@ import {
 	DropdownMenuContent,
 	DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button/button";
+import { Button } from "@/components/ui/button";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { useDatatableContext } from "@/components/composite/datatable";
 

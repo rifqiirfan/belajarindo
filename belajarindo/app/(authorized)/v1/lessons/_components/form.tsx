@@ -1,0 +1,96 @@
+"use client"
+
+import { InputBasic, InputCombobox, TextareaBasic } from "@/components/inputs";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { useLoading } from "@/components/providers/fullscreen-loading";
+import { Card, CardContent } from "@/components/ui/card";
+import { FormPageProps } from "@/core/types/pages";
+import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { getCourses } from "@/core/services/course.service";
+import { sParamComboboxGeneral } from "@/core/utilities/zodUtils";
+import { LessonsDataTypes, zLessons } from "@/core/models/lesson.model";
+import { createLesson, updateLesson } from "@/core/services/lesson.service";
+
+export default function FormLessons({ data, type }: FormPageProps) {
+  const [, setLoading] = useLoading()
+
+  const form = useForm<LessonsDataTypes>({
+    resolver: zodResolver(zLessons.FORM),
+    ...(data ? { defaultValues: data } : {})
+  })
+
+  const onSubmit = async (data: LessonsDataTypes) => {
+    try {
+      setLoading(true)
+      if (type === "create") {
+        const res = await createLesson({ data })
+        if (!res.success) {
+          toast.error(`${type} Failed. ${res.error}`)
+          return
+        }
+        form.reset()
+      }
+      if (type === "update") {
+        const newData = {
+          id: data.id,
+          data: data
+        }
+        const res = await updateLesson(newData)
+        if (!res.success) {
+          toast.error(`${type} Failed. ${res.error}`)
+          return
+        }
+      }
+      toast.success(`${type} Success`)
+    }
+    catch (e: any) {
+      toast.error(`${type} Failed. ${e?.message}`)
+    }
+    finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <Card>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <InputCombobox
+              name={"course_id"}
+              required={true}
+              disabled={type === "detail"}
+              onSelect={async ({ option }) => { }}
+              queryOptions={{
+                queryKey: ["course_id"],
+                queryFn: async ({ search, value }) => {
+                  const query = sParamComboboxGeneral(search, "id,name");
+                  const { data = [] } = await getCourses({ query });
+                  return data.map((v) => ({
+                    label: v.name,
+                    value: v.id,
+                  }));
+                },
+              }}
+            />
+            <InputBasic name={"title"} required={true} disabled={type === "detail"} />
+            <TextareaBasic name={"content"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"audio_url"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"video_url"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"experience_point"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"lesson_order"} required={true} disabled={type === "detail"} />
+
+            <div className="flex gap-2">
+              {type !== "detail" && <Button type="submit">Submit</Button>}
+              <Button type="button" variant={'outline'} asChild><Link href={'/v1/lessons'}>Back</Link></Button>
+            </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
+  )
+}
