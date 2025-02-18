@@ -46,14 +46,20 @@ export default function Dashboard() {
             </div>
           </header>
           <div>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+            <div className="grid w-full max-w-sm items-center gap-4">
               <Label htmlFor="username">Username</Label>
               <Input type="text" id="username" placeholder="johndoe" />
-              <Label htmlFor="username">Email</Label>
+              <Label htmlFor="email">Email</Label>
               <Input type="email" id="email" placeholder="john.doe@aol.com" />
+              <Label htmlFor="fullname">Name</Label>
+              <Input type="text" id="fullname" placeholder="John Doe" />
+              <Label htmlFor="password">New password</Label>
+              <Input type="password" id="password" placeholder="" />
+              <Label htmlFor="password">Confirm New password</Label>
+              <Input type="password" id="password" placeholder="" />
+              <Button type="submit">Update</Button>
             </div>
           </div>
-          <Button type="submit">Update</Button>
         </SidebarInset>
       </SidebarProvider>
     )

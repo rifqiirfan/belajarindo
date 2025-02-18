@@ -53,20 +53,22 @@ export default function ProgressPage() {
           </div>
         </header>
         <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableCaption>A list of your recent course progress.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Invoice</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Method</TableHead>
+              <TableHead>Course</TableHead>
+              <TableHead>Level</TableHead>
+              <TableHead>Lesson</TableHead>
+              <TableHead>Date Enrolled</TableHead>
               <TableHead>Progress</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell className="font-medium">INV001</TableCell>
-              <TableCell>Paid</TableCell>
-              <TableCell>Credit Card</TableCell>
+              <TableCell>Beginner</TableCell>
+              <TableCell>BIPA 1</TableCell>
+              <TableCell>Introduction</TableCell>
+              <TableCell>18 February 2025</TableCell>
               <TableCell>
                 <Progress value={33} />
               </TableCell>

@@ -12,8 +12,6 @@ import {
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProfile } from "@/components/nav-profile"
-import { NavAdmin } from "@/components/nav-admin"
 import { NavUser } from "@/components/nav-user"
 import {
   Sidebar,
@@ -57,7 +55,7 @@ const data = {
         },
         {
           title: "Advancced BIPA 6-7",
-          url: "/course/bipa-6",
+          url: "/course/bipa-6-7",
         },
       ],
     },

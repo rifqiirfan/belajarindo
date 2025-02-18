@@ -5,6 +5,6 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div className="">Achievement Page</div>
+    <div className="">Advanced BIPA 5</div>
   )
 }
