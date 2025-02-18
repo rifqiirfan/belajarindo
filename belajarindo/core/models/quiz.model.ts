@@ -17,7 +17,7 @@ const zQuizzesSchemaDefault = z.object({
 export type QuizzesDataTypes = z.infer<typeof zQuizzesSchemaDefault>;
 
 export const zQuizzesWithRelation = zQuizzesSchemaDefault.extend({
-
+  lesson_name: zFallbackString(),
 });
 
 export type QuizzesRelationDataTypes = z.infer<typeof zQuizzesWithRelation>;

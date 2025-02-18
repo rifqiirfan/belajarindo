@@ -10,7 +10,7 @@ import DatatableWrapperRouter from "@/components/strict/datatable/wrapper/server
 import ServerResponseHandler from "@/components/strict/server-response-handler";
 import { transformQueryOld } from "@/core/utilities/datatableUtils";
 import { zQuizzes } from "@/core/models/quiz.model";
-import { getQuizzes } from "@/core/services/quiz.service";
+import { getQuizzes, getQuizzesRelation } from "@/core/services/quiz.service";
 
 const PICK_FILTER: any = () => {
   return { question_text: true }
@@ -19,7 +19,7 @@ const PICK_FILTER: any = () => {
 export default async function QuizzesDatatable({ searchParams }: Omit<PageProps, "params">) {
   const { data: query } = datatableStateSchemaOld.safeParse(searchParams)
 
-  const res = await getQuizzes({
+  const res = await getQuizzesRelation({
     query: transformQueryOld(query!, zQuizzes.BASE.pick(PICK_FILTER()).keyof().options),
   })
 

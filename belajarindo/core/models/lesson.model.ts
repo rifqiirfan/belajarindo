@@ -16,7 +16,7 @@ const zLessonsSchemaDefault = z.object({
 export type LessonsDataTypes = z.infer<typeof zLessonsSchemaDefault>;
 
 export const zLessonsWithRelation = zLessonsSchemaDefault.extend({
-
+  course_name: zFallbackString(),
 });
 
 export type LessonsRelationDataTypes = z.infer<typeof zLessonsWithRelation>;

@@ -5,7 +5,7 @@ import { nextRequestChain, transformResponse } from "@/core/utilities/fetchUtils
 import { ActionGetData, ActionGetListData, ActionResponse, GetData } from "@/core/types/response";
 import { revalidateTag } from "next/cache";
 import { getOnErrorDataResponse, getOnErrorDatatableResponse, getOnSuccessDataResponse, getOnSuccessDatatableResponse } from "@/lib/handling";
-import { CoursesDataTypes } from "../models/course.model";
+import { CoursesDataTypes, CoursesRelationDataTypes } from "../models/course.model";
 
 const urls = `${BASE_URL()}/v1/courses`;
 const TAGS = 'courses';
@@ -18,6 +18,38 @@ export async function getCourses({ query }: { query?: URLSearchParams | string }
 	}).withAuth({ cache: false })
 
 	const payload = await transformResponse<GetData<CoursesDataTypes>>(r.getWithFetch(), r.getRequestAndData())
+
+	if (!payload.success) {
+		return getOnErrorDatatableResponse({ error: payload.error })
+	}
+
+	return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
+}
+
+export async function getCoursesRelation({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesRelationDataTypes>>> {
+	const r = nextRequestChain(`${urls}_join?${query?.toString()}`, {
+		next: {
+			tags: [TAGS],
+		}
+	}).withAuth({ cache: false })
+
+	const payload = await transformResponse<GetData<CoursesRelationDataTypes>>(r.getWithFetch(), r.getRequestAndData())
+
+	if (!payload.success) {
+		return getOnErrorDatatableResponse({ error: payload.error })
+	}
+
+	return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
+}
+
+export async function getCoursesByLevel({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesRelationDataTypes>>> {
+	const r = nextRequestChain(`${urls}/level?${query?.toString()}`, {
+		next: {
+			tags: [TAGS],
+		}
+	}).withAuth({ cache: false })
+
+	const payload = await transformResponse<GetData<CoursesRelationDataTypes>>(r.getWithFetch(), r.getRequestAndData())
 
 	if (!payload.success) {
 		return getOnErrorDatatableResponse({ error: payload.error })

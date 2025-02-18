@@ -5,7 +5,7 @@ import {nextRequestChain, transformResponse} from "@/core/utilities/fetchUtils";
 import {ActionGetData, ActionGetListData, ActionResponse, GetData} from "@/core/types/response";
 import {revalidateTag} from "next/cache";
 import { getOnErrorDataResponse, getOnErrorDatatableResponse, getOnSuccessDataResponse, getOnSuccessDatatableResponse } from "@/lib/handling";
-import { LessonsDataTypes } from "../models/lesson.model";
+import { LessonsDataTypes, LessonsRelationDataTypes } from "../models/lesson.model";
 
 const urls = `${BASE_URL()}/v1/lessons`;
 const TAGS = 'lessons';
@@ -24,6 +24,22 @@ export async function getLessons({ query }: { query?: URLSearchParams | string }
   }
 
   return getOnSuccessDatatableResponse({message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count})
+}
+
+export async function getLessonsRelation({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<LessonsRelationDataTypes>>> {
+  const r = nextRequestChain(`${urls}_join?${query?.toString()}`, {
+    next: {
+      tags: [TAGS],
+    }
+  }).withAuth({ cache: false })
+
+  const payload = await transformResponse<GetData<LessonsRelationDataTypes>>(r.getWithFetch(), r.getRequestAndData())
+
+  if (!payload.success) {
+    return getOnErrorDatatableResponse({ error: payload.error })
+  }
+
+  return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
 }
 
 export async function getLessonById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<LessonsDataTypes>, ActionGetData<{}>>> {

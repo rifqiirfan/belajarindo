@@ -9,7 +9,7 @@ import Link from "next/link";
 import DatatableWrapperRouter from "@/components/strict/datatable/wrapper/server/router";
 import ServerResponseHandler from "@/components/strict/server-response-handler";
 import { transformQueryOld } from "@/core/utilities/datatableUtils";
-import { getCourses } from "@/core/services/course.service";
+import { getCourses, getCoursesRelation } from "@/core/services/course.service";
 import { zCourses } from "@/core/models/course.model";
 
 const PICK_FILTER: any = () => {
@@ -19,7 +19,7 @@ const PICK_FILTER: any = () => {
 export default async function CoursesDatatable({ searchParams }: Omit<PageProps, "params">) {
   const { data: query } = datatableStateSchemaOld.safeParse(searchParams)
 
-  const res = await getCourses({
+  const res = await getCoursesRelation({
     query: transformQueryOld(query!, zCourses.BASE.pick(PICK_FILTER()).keyof().options),
   })
 

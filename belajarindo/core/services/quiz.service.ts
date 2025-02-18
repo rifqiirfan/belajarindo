@@ -5,7 +5,7 @@ import {nextRequestChain, transformResponse} from "@/core/utilities/fetchUtils";
 import {ActionGetData, ActionGetListData, ActionResponse, GetData} from "@/core/types/response";
 import {revalidateTag} from "next/cache";
 import { getOnErrorDataResponse, getOnErrorDatatableResponse, getOnSuccessDataResponse, getOnSuccessDatatableResponse } from "@/lib/handling";
-import { QuizzesDataTypes } from "../models/quiz.model";
+import { QuizzesDataTypes, QuizzesRelationDataTypes } from "../models/quiz.model";
 
 const urls = `${BASE_URL()}/v1/quizzes`;
 const TAGS = 'quizzes';
@@ -24,6 +24,22 @@ export async function getQuizzes({ query }: { query?: URLSearchParams | string }
   }
 
   return getOnSuccessDatatableResponse({message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count})
+}
+
+export async function getQuizzesRelation({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<QuizzesRelationDataTypes>>> {
+  const r = nextRequestChain(`${urls}_join?${query?.toString()}`, {
+    next: {
+      tags: [TAGS],
+    }
+  }).withAuth({ cache: false })
+
+  const payload = await transformResponse<GetData<QuizzesRelationDataTypes>>(r.getWithFetch(), r.getRequestAndData())
+
+  if (!payload.success) {
+    return getOnErrorDatatableResponse({ error: payload.error })
+  }
+
+  return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
 }
 
 export async function getQuizById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<QuizzesDataTypes>, ActionGetData<{}>>> {

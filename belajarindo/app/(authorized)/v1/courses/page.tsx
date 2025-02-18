@@ -4,7 +4,7 @@ import { PageProps } from "@/core/types/datatable";
 import { Card, CardContent } from "@/components/ui/card";
 import { SkeletonDatatable } from "@/components/composite/skeletons/datatable";
 import { ProtectDefault } from "@/components/composite/protects";
-import AchievementsDatatable from "./_components/datatable";
+import CoursesDatatable from "./_components/datatable";
 
 export const metadata: Metadata = {
   title: "Course",
@@ -22,7 +22,7 @@ export default async function Page({ searchParams }: PageProps) {
       <Card className="">
         <CardContent>
           <Suspense fallback={<SkeletonDatatable />}>
-            <AchievementsDatatable searchParams={searchParams} />
+            <CoursesDatatable searchParams={searchParams} />
           </Suspense>
         </CardContent>
       </Card>
