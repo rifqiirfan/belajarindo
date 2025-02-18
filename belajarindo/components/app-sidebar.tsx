@@ -50,11 +50,11 @@ const data = {
           url: "/course/bipa-4",
         },
         {
-          title: "Advancced BIPA 5",
+          title: "Advanced BIPA 5",
           url: "/course/bipa-5",
         },
         {
-          title: "Advancced BIPA 6-7",
+          title: "Advanced BIPA 6-7",
           url: "/course/bipa-6-7",
         },
       ],

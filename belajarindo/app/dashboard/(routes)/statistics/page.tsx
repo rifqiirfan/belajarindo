@@ -1,7 +1,4 @@
-"use client"
-
-import { AppSidebar } from "@/components/app-sidebar";
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis, ResponsiveContainer } from "recharts"
+import { AppSidebar } from "@/components/app-sidebar"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,45 +6,25 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart"
-import { Separator } from "@/components/ui/separator";
+} from "@/components/ui/breadcrumb"
+import { Progress } from "@/components/ui/progress"
+import { Separator } from "@/components/ui/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/sidebar"
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-]
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
-  },
-} satisfies ChartConfig
-
-const metadata = {
+export const metadata = {
   title: 'Statistics | Belajar Indo',
 }
 
@@ -75,55 +52,27 @@ export default function StatisticsPage() {
             </Breadcrumb>
           </div>
         </header>
-        <div className="p-6 space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Bar Chart - Label</CardTitle>
-            <CardDescription>January - June 2024</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ChartContainer config={chartConfig}>
-              <ResponsiveContainer width="100%" height={400}>
-                <BarChart
-                  data={chartData}
-                  margin={{
-                    top: 20,
-                  }}
-                >
-                  <CartesianGrid vertical={false} />
-                  <XAxis
-                    dataKey="month"
-                    tickLine={false}
-                    tickMargin={10}
-                    axisLine={false}
-                    tickFormatter={(value) => value.slice(0, 3)}
-                  />
-                  <ChartTooltip
-                    cursor={false}
-                    content={<ChartTooltipContent hideLabel />}
-                  />
-                  <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
-                    <LabelList
-                      position="top"
-                      offset={12}
-                      className="fill-foreground"
-                      fontSize={12}
-                    />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col items-start gap-2 text-sm">
-            <div className="flex gap-2 font-medium leading-none">
-              The latest updated on 18 February 2025.
-            </div>
-            <div className="leading-none text-muted-foreground">
-              Showing total scores gained by the user.
-            </div>
-          </CardFooter>
-        </Card>
-      </div>
+        <Table>
+          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">Invoice</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Method</TableHead>
+              <TableHead>Progress</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-medium">INV001</TableCell>
+              <TableCell>Paid</TableCell>
+              <TableCell>Credit Card</TableCell>
+              <TableCell>
+                <Progress value={33} />
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </SidebarInset>
     </SidebarProvider>
   )

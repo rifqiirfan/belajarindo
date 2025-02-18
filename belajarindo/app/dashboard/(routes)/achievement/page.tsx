@@ -54,14 +54,14 @@ export default function AchievementPage() {
           </header>
           <div className="flex flex-1 flex-col gap-8 p-8">
             <div className="grid auto-rows-min gap-8 md:grid-cols-3">
-              <Card className="bg-orange-100">
+              <Card className="bg-green-400">
                 <CardHeader>
                   <CardTitle>Beginner</CardTitle>
                   <CardDescription>BIPA 1 and BIPA 2</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl">1</p>
-                  <p>Enrolled course</p>
+                  <p className="text-green-950">Enrolled course</p>
                 </CardContent>
                 <CardContent>
                   <p>Progress: <Progress value={10} /></p>
@@ -70,14 +70,14 @@ export default function AchievementPage() {
                   <p>Achievement: <CircleX /></p>
                 </CardFooter>
               </Card>
-              <Card className="bg-cyan-100">
+              <Card className="bg-cyan-400">
                 <CardHeader>
                   <CardTitle>Intermediate</CardTitle>
                   <CardDescription>BIPA 3 and BIPA 4</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl">0</p>
-                  <p>Enrolled course</p>
+                  <p className="text-cyan-950">Enrolled course</p>
                 </CardContent>
                 <CardContent>
                   <p>Progress: <Progress value={0} /></p>
@@ -86,14 +86,14 @@ export default function AchievementPage() {
                   <p>Achievement: <CircleX /></p>
                 </CardFooter>
               </Card>
-              <Card className="bg-purple-200">
+              <Card className="bg-pink-400">
                 <CardHeader>
                   <CardTitle>Advanced</CardTitle>
                   <CardDescription>BIPA 5, BIPA 6, and BIPA 7</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl">0</p>
-                  <p>Enrolled course</p>
+                  <p className="text-pink-950">Enrolled course</p>
                 </CardContent>
                 <CardContent>
                   <p>Progress: <Progress value={0} /></p>
