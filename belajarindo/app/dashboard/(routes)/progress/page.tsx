@@ -46,7 +46,7 @@ export default function ProgressPage() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Statistics</BreadcrumbPage>
+                  <BreadcrumbPage>Progress</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
