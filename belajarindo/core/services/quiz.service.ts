@@ -27,7 +27,7 @@ export async function getQuizzes({ query }: { query?: URLSearchParams | string }
 }
 
 export async function getQuizzesRelation({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<QuizzesRelationDataTypes>>> {
-  const r = nextRequestChain(`${urls}_join?${query?.toString()}`, {
+  const r = nextRequestChain(`${urls}-relation?${query?.toString()}`, {
     next: {
       tags: [TAGS],
     }

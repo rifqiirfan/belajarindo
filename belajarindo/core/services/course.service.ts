@@ -27,7 +27,7 @@ export async function getCourses({ query }: { query?: URLSearchParams | string }
 }
 
 export async function getCoursesRelation({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesRelationDataTypes>>> {
-	const r = nextRequestChain(`${urls}_join?${query?.toString()}`, {
+	const r = nextRequestChain(`${urls}-relation?${query?.toString()}`, {
 		next: {
 			tags: [TAGS],
 		}
