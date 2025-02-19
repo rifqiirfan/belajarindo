@@ -1,5 +1,7 @@
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata = {
   title: 'Beginner BIPA 1 Courses | Belajar Indo',
@@ -20,9 +22,12 @@ export default function Page() {
             />
           </div>
           <div className="sm:w-2/3 p-4">
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">Introduction</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Introduction</h2>
             <Badge className="bg-green-200">Beginner</Badge>
-            <p className="text-gray-600 mt-2">Type the description here</p>
+            <p className="text-gray-600 mt-4">Type the description here</p>
+            <Button className="mt-4">
+              <Link href="/course/bipa-1/lesson/introduction" >Start lesson</Link>
+            </Button>
           </div>
         </div>
       </div>
