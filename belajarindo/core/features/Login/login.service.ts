@@ -5,7 +5,7 @@ import { storeToken } from "@/core/utilities/authUtils"
 import { BASE_URL } from "@/core/utilities/envUtils";
 import { extractPayload, processResponse, validateResponse } from "@/core/utilities/fetchUtils"
 import { redirect } from "next/navigation";
-import {NextRequest} from "next/server";
+import { NextRequest } from "next/server";
 
 const LOGIN_URL = `${BASE_URL()}/login`
 
@@ -50,11 +50,37 @@ type ResponseAuth = GetResponse<never> & {
 // }
 
 export const loginGoogle = async (code: string) => {
-  // const r = nextRequestChain(`${BASE_URL()}/exchange-code`, {
-  //   method: "POST",
-  //   body: JSON.stringify({ code: code }),
-  // }).custom()
-  console.log(code)
+
+  const res: any = await fetch('https://oauth2.googleapis.com/token', {
+    method: "POST",
+    body: JSON.stringify({
+      code: code,
+      client_id: '881409856333-dgqitg8l73prmagbbjuqh36agu1drk1d.apps.googleusercontent.com',
+      client_secret: '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',
+      redirect_uri: 'postmessage',
+      grant_type: 'authorization_code',
+    })
+  }
+  ).then(r => r.json())
+
+  const accessToken = res?.access_token;
+  const userInfo: any = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + accessToken,
+      "Content-Type": "application/json"
+    }
+  }
+  ).then(r => r.json())
+
+  /**
+   * result was 
+   * userInfo = .name, .email,
+   */
+
+
+  // hit the data given to backend, make sure if the backend has email, then apply bearer in here
+  // if the data is not exist in back-end, then regist and accept the bearer
   const r = new NextRequest(`${BASE_URL()}/exchange-code`, {
     method: "POST",
     headers: {

@@ -35,27 +35,27 @@ const data = {
       items: [
         {
           title: "Beginner BIPA 1",
-          url: "/course/bipa-1",
+          url: "/course/beginner/bipa-1",
         },
         {
           title: "Beginner BIPA 2",
-          url: "/course/bipa-2",
+          url: "/course/beginner/bipa-2",
         },
         {
           title: "Intermediate BIPA 3",
-          url: "/course/bipa-3",
+          url: "/course/intermediate/bipa-3",
         },
         {
           title: "Intermediate BIPA 4",
-          url: "/course/bipa-4",
+          url: "/course/intermediate/bipa-4",
         },
         {
           title: "Advanced BIPA 5",
-          url: "/course/bipa-5",
+          url: "/course/advanced/bipa-5",
         },
         {
           title: "Advanced BIPA 6-7",
-          url: "/course/bipa-6-7",
+          url: "/course/advanced/bipa-6-7",
         },
       ],
     },

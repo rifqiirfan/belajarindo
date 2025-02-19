@@ -42,6 +42,22 @@ export async function getLessonsRelation({ query }: { query?: URLSearchParams | 
   return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
 }
 
+export async function getLessonsByCourse({ course_id, query }: { course_id: string, query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<LessonsRelationDataTypes>>> {
+  const r = nextRequestChain(`${urls}-courses/${course_id}?${query?.toString()}`, {
+    next: {
+      tags: [TAGS],
+    }
+  }).withAuth({ cache: false })
+
+  const payload = await transformResponse<GetData<LessonsRelationDataTypes>>(r.getWithFetch(), r.getRequestAndData())
+
+  if (!payload.success) {
+    return getOnErrorDatatableResponse({ error: payload.error })
+  }
+
+  return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
+}
+
 export async function getLessonById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<LessonsDataTypes>, ActionGetData<{}>>> {
   const r = nextRequestChain(`${urls}/${id}?${query?.toString()}`, {
     next: {

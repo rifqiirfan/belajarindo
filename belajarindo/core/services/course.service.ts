@@ -42,10 +42,10 @@ export async function getCoursesLessons({ query }: { query?: URLSearchParams | s
 	return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
 }
 
-export async function getCoursesByLevel({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesRelationDataTypes>>> {
-	const r = nextRequestChain(`${urls}/level?${query?.toString()}`, {
+export async function getCoursesByLevel({ bipa, query }: { bipa: string, query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesRelationDataTypes>>> {
+	const r = nextRequestChain(`${urls}-bipa/${bipa}?${query?.toString()}`, {
 		next: {
-			tags: [TAGS],
+			tags: [TAGS, 'level'],
 		}
 	}).withAuth({ cache: false })
 
