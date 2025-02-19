@@ -1,8 +1,8 @@
-import { cookies } from "next/headers";
-import { ActionResponse, GetResponse } from "@/core/types/response";
-import { NextRequest } from "next/server";
+// import {cookies} from "next/headers";
+import {ActionResponse, GetResponse} from "@/core/types/response";
+import {NextRequest} from "next/server";
 
-const cookieStore = await cookies();
+// const cookieStore = await cookies();
 
 export const nextRequestChain = (...args: ConstructorParameters<typeof NextRequest>) => {
   const [input, init = {}] = args
@@ -12,20 +12,20 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
     headers: {
       "Access-Control-Allow-Origin": '*',
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${cookieStore.get("session")?.value}`,
+      // "Authorization": `Bearer ${cookieStore.get("session")?.value}`,
       ...(init.headers || {}),
     },
   }
 
   const bundle = {
     get: function () {
-      return new NextRequest(input, { ...initRequest })
+      return new NextRequest(input, {...initRequest})
     },
     getRequestAndData: function () {
-      return { request: this.get(), body: String(init?.body || '') };
+      return {request: this.get(), body: String(init?.body || '')};
     },
     getWithFetch: function () {
-      return fetch(input, { ...initRequest })
+      return fetch(input, {...initRequest})
     },
   }
 
@@ -34,7 +34,7 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
       return bundle;
     },
     withAuth: function (options?: { cache: boolean }) {
-      if (!options?.cache) initRequest = { ...initRequest, cache: "no-store" }
+      if (!options?.cache) initRequest = {...initRequest, cache: "no-store"}
       // const newHeaders = { ...initRequest.headers, "Authorization": `Bearer ${cookieStore.get("session")?.value}` };
       // initRequest = { ...initRequest, headers: newHeaders };
       return bundle;
@@ -44,7 +44,9 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
   return actions;
 };
 
-export async function processResponse(promise: Promise<Response>, options: {}): Promise<ActionResponse<{ response: Response }, {}>> {
+export async function processResponse(promise: Promise<Response>, options: {}): Promise<ActionResponse<{
+  response: Response
+}, {}>> {
   try {
     const response = await promise
     return {
@@ -60,7 +62,9 @@ export async function processResponse(promise: Promise<Response>, options: {}): 
   }
 }
 
-export async function validateResponse(response: Response, options: { extend?: (response: Response,) => ActionResponse<{}> }): Promise<ActionResponse<{}>> {
+export async function validateResponse(response: Response, options: {
+  extend?: (response: Response,) => ActionResponse<{}>
+}): Promise<ActionResponse<{}>> {
   if (response.status === 401) {
     return {
       success: false,
@@ -101,13 +105,16 @@ export async function extractPayload<T>(response: Response, options: {}): Promis
   }
 }
 
-export async function transformResponse<T>(promise: Promise<Response>, options?: { request: NextRequest, body?: string }): Promise<ActionResponse<{ data: T }, {}>> {
+export async function transformResponse<T>(promise: Promise<Response>, options?: {
+  request: NextRequest,
+  body?: string
+}): Promise<ActionResponse<{ data: T }, {}>> {
   const processed = await processResponse(promise, {})
   if (!processed.success) {
     return processed
   }
 
-  const { response } = processed
+  const {response} = processed
 
   const validated = await validateResponse(response, {})
   if (!validated.success) {
@@ -119,7 +126,7 @@ export async function transformResponse<T>(promise: Promise<Response>, options?:
     return extracted
   }
 
-  const { payload } = extracted
+  const {payload} = extracted
 
   if (!payload.success && payload.errors) {
     const errorMessage = Object.values(payload.errors).flat().join(", ")

@@ -1,9 +1,8 @@
 "use server"
 
-import { createJWT, validateJWT } from "oslo/jwt";
-import { TimeSpan } from "oslo";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import {validateJWT} from "oslo/jwt";
+import {cookies} from "next/headers";
+import {redirect} from "next/navigation";
 
 const secret = new TextEncoder().encode(process.env.SECRET_BE)
 
