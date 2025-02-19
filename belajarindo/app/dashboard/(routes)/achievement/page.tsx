@@ -57,49 +57,67 @@ export default function AchievementPage() {
               <Card className="bg-green-400">
                 <CardHeader>
                   <CardTitle>Beginner</CardTitle>
-                  <CardDescription>BIPA 1 and BIPA 2</CardDescription>
+                  <CardDescription className="text-green-950">BIPA 1 and BIPA 2</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl">1</p>
-                  <p className="text-green-950">Enrolled course</p>
+                  <p className="text-green-950">Enrolled lesson(s)</p>
                 </CardContent>
                 <CardContent>
-                  <p>Progress: <Progress value={10} /></p>
+                  <div className="flex items-center gap-2">
+                    <span>Progress:</span>
+                    <Progress value={10} />
+                  </div>
                 </CardContent>
                 <CardFooter>
-                  <p>Achievement: <CircleX /></p>
+                  <div className="flex items-center gap-2">
+                    <span>Achievement:</span>
+                    <CircleX />
+                  </div>
                 </CardFooter>
               </Card>
               <Card className="bg-cyan-400">
                 <CardHeader>
                   <CardTitle>Intermediate</CardTitle>
-                  <CardDescription>BIPA 3 and BIPA 4</CardDescription>
+                  <CardDescription className="text-cyan-950">BIPA 3 and BIPA 4</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl">0</p>
-                  <p className="text-cyan-950">Enrolled course</p>
+                  <p className="text-cyan-950">Enrolled lesson(s)</p>
                 </CardContent>
                 <CardContent>
-                  <p>Progress: <Progress value={0} /></p>
+                  <div className="flex items-center gap-2">
+                    <span>Progress:</span>
+                    <Progress value={0} />
+                  </div>
                 </CardContent>
                 <CardFooter>
-                  <p>Achievement: <CircleX /></p>
+                  <div className="flex items-center gap-2">
+                    <span>Achievement:</span>
+                    <CircleX />
+                  </div>
                 </CardFooter>
               </Card>
               <Card className="bg-pink-400">
                 <CardHeader>
                   <CardTitle>Advanced</CardTitle>
-                  <CardDescription>BIPA 5, BIPA 6, and BIPA 7</CardDescription>
+                  <CardDescription className="text-pink-950">BIPA 5, BIPA 6, and BIPA 7</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl">0</p>
-                  <p className="text-pink-950">Enrolled course</p>
+                  <p className="text-pink-950">Enrolled lesson(s)</p>
                 </CardContent>
                 <CardContent>
-                  <p>Progress: <Progress value={0} /></p>
+                  <div className="flex items-center gap-2">
+                    <span>Progress:</span>
+                    <Progress value={0} />
+                  </div>
                 </CardContent>
                 <CardFooter>
-                  <p>Achievement: <CircleX /></p>
+                  <div className="flex items-center gap-2">
+                    <span>Achievement:</span>
+                    <CircleX />
+                  </div>
                 </CardFooter>
               </Card>
             </div>

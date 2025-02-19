@@ -10,7 +10,7 @@ import DatatableWrapperRouter from "@/components/strict/datatable/wrapper/server
 import ServerResponseHandler from "@/components/strict/server-response-handler";
 import { transformQueryOld } from "@/core/utilities/datatableUtils";
 import { zLessons } from "@/core/models/lesson.model";
-import { getLessons } from "@/core/services/lesson.service";
+import { getLessons, getLessonsRelation } from "@/core/services/lesson.service";
 
 const PICK_FILTER: any = () => {
   return { name: true }
@@ -19,7 +19,7 @@ const PICK_FILTER: any = () => {
 export default async function LessonsDatatable({ searchParams }: Omit<PageProps, "params">) {
   const { data: query } = datatableStateSchemaOld.safeParse(searchParams)
 
-  const res = await getLessons({
+  const res = await getLessonsRelation({
     query: transformQueryOld(query!, zLessons.BASE.pick(PICK_FILTER()).keyof().options),
   })
 
@@ -39,7 +39,7 @@ export default async function LessonsDatatable({ searchParams }: Omit<PageProps,
           search={<FilterRouter fields={PICK_FILTER()} placeholder={"Search..."} />}
           actions={
             <>
-              <Button asChild><Link href={"/v1/Lessons/create"}>Create</Link></Button>
+              <Button asChild><Link href={"/v1/lessons/create"}>Create</Link></Button>
             </>
           }
         />

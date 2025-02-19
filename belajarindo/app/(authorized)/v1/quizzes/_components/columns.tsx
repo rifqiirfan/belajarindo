@@ -23,7 +23,7 @@ export const columns: ColumnDef<QuizzesDataTypes>[] = [
       <SimpleAction
         detailUrl={`/v1/quizzes/${row.original.id}`}
         editUrl={`/v1/quizzes/${row.original.id}/edit`}
-        onDelete={() => deleteQuiz({ id: row.original.id })}
+        onDelete={() => deleteQuiz({ id: String(row.original.id) })}
       />
     ),
   }

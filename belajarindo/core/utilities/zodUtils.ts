@@ -187,26 +187,3 @@ export function sParamComboboxGeneral(search: string, fields: string = 'id,name'
 
 	return queryParams;
 }
-
-// export function sParamComboboxByGroup({ q = "", pagination = { pageIndex: 0, pageSize: 100 }, columnFilters = [], columnVisibility = { id: true, name: true } }: Partial<Omit<DatatableQueryParams, "sorting">>) {
-// 	const fields = Object.keys(columnVisibility)
-
-// 	const generalSearch: ColumnFilters = q ? fields.filter((f) => !f.includes("id")).map((k) => ({ id: k, value: q || "", operator: "ilike", condition: "or" })) : []
-// 	const obj = {
-// 		page: ((pagination?.pageIndex ?? 0) + 1).toString(),
-// 		page_size: (pagination?.pageSize ?? 100).toString(),
-// 		filter: JSON.stringify(transformFilters([
-// 			...columnFilters,
-// 			{
-// 				operator: "group",
-// 				value: generalSearch,
-// 				condition: "and"
-// 			}
-// 		])),
-// 		fields: fields.join(","),
-// 	}
-
-// 	console.log(obj)
-
-// 	return new URLSearchParams(obj).toString()
-// }

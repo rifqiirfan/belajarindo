@@ -9,8 +9,8 @@ import { deleteCourse } from "@/core/services/course.service";
 export const columns: ColumnDef<CoursesDataTypes>[] = [
   generateSortableColumn("name"),
   generateSortableColumn("description"),
-  generateSortableColumn("level"),
-  generateSortableColumn("total_lesson"),
+  generateSortableColumn("difficulty_level"),
+  // generateSortableColumn("total_lesson"),
   {
     id: "action",
     header: "Action",
@@ -20,7 +20,7 @@ export const columns: ColumnDef<CoursesDataTypes>[] = [
       <SimpleAction
         detailUrl={`/v1/courses/${row.original.id}`}
         editUrl={`/v1/courses/${row.original.id}/edit`}
-        onDelete={() => deleteCourse({ id: row.original.id })}
+        onDelete={() => deleteCourse({ id: String(row.original.id) })}
       />
     ),
   }

@@ -3,9 +3,9 @@ import { z } from "zod"
 import { baseModel } from "./base_model";
 
 const zQuizzesSchemaDefault = z.object({
-  id: zFallbackUuid(),
+  id: z.number(),
   question_text: zFallbackString(),
-  lesson_id: zFallbackString(),
+  lesson_id: z.number(),
   correct_answer: zFallbackString(),
   option_1: zFallbackString(),
   option_2: zFallbackString(),
@@ -17,7 +17,7 @@ const zQuizzesSchemaDefault = z.object({
 export type QuizzesDataTypes = z.infer<typeof zQuizzesSchemaDefault>;
 
 export const zQuizzesWithRelation = zQuizzesSchemaDefault.extend({
-
+  lesson_name: zFallbackString(),
 });
 
 export type QuizzesRelationDataTypes = z.infer<typeof zQuizzesWithRelation>;

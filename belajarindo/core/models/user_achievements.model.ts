@@ -3,9 +3,9 @@ import { z } from "zod"
 import { baseModel } from "./base_model";
 
 const zAchievementUsersSchemaDefault = z.object({
-  id: zFallbackUuid(),
-  user_id: zFallbackString(),
-  achievement_id: zFallbackString(),
+  id: z.number(),
+  user_id: z.number(),
+  achievement_id: z.number(),
   date_earned: zFallbackString(),
 }).merge(baseModel);
 

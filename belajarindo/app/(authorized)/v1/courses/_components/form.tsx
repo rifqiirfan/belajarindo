@@ -10,24 +10,24 @@ import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { getCourses } from "@/core/services/course.service";
+import { createCourse, updateCourse } from "@/core/services/course.service";
 import { sParamComboboxGeneral } from "@/core/utilities/zodUtils";
-import { LessonsDataTypes, zLessons } from "@/core/models/lesson.model";
-import { createLesson, updateLesson } from "@/core/services/lesson.service";
+import { CoursesDataTypes, zCourses } from "@/core/models/course.model";
 
 export default function FormLessons({ data, type }: FormPageProps) {
   const [, setLoading] = useLoading()
 
-  const form = useForm<LessonsDataTypes>({
-    resolver: zodResolver(zLessons.FORM),
+  const form = useForm<CoursesDataTypes>({
+    resolver: zodResolver(zCourses.FORM),
     ...(data ? { defaultValues: data } : {})
   })
 
-  const onSubmit = async (data: LessonsDataTypes) => {
+  const onSubmit = async (data: CoursesDataTypes) => {
     try {
       setLoading(true)
       if (type === "create") {
-        const res = await createLesson({ data })
+        data.creation_date = new Date().toISOString();
+        const res = await createCourse({ data })
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
@@ -39,7 +39,7 @@ export default function FormLessons({ data, type }: FormPageProps) {
           id: data.id,
           data: data
         }
-        const res = await updateLesson(newData)
+        const res = await updateCourse(newData)
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
@@ -73,7 +73,7 @@ export default function FormLessons({ data, type }: FormPageProps) {
             <InputBasic name={"name"} required={true} disabled={type === "detail"} />
             <TextareaBasic name={"description"} required={true} disabled={type === "detail"} />
             <InputSelect
-              name={"level"}
+              name={"difficulty_level"}
               required={true}
               disabled={type === "detail"}
               label="Level"

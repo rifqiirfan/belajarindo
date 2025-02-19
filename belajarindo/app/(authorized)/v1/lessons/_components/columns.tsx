@@ -20,7 +20,7 @@ export const columns: ColumnDef<LessonsDataTypes>[] = [
       <SimpleAction
         detailUrl={`/v1/lessons/${row.original.id}`}
         editUrl={`/v1/lessons/${row.original.id}/edit`}
-        onDelete={() => deleteLesson({ id: row.original.id })}
+        onDelete={() => deleteLesson({ id: String(row.original.id) })}
       />
     ),
   }

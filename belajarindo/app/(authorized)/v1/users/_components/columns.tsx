@@ -22,7 +22,7 @@ export const columns: ColumnDef<UsersDataTypes>[] = [
       <SimpleAction
         detailUrl={`/v1/users/${row.original.id}`}
         editUrl={`/v1/users/${row.original.id}/edit`}
-        onDelete={() => deleteUser({ id: row.original.id })}
+        onDelete={() => deleteUser({ id: String(row.original.id) })}
       />
     ),
   }
