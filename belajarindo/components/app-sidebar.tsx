@@ -5,8 +5,8 @@ import {
   BookOpen,
   ChartLine,
   FileCog,
+  ListTodo,
   Star,
-  Pickaxe,
   User,
   UserCog,
 } from "lucide-react"
@@ -91,7 +91,7 @@ const data = {
     {
       title: "Progress",
       url: "/dashboard/progress",
-      icon: Pickaxe,
+      icon: ListTodo,
     },
     {
       title: "Achievement",

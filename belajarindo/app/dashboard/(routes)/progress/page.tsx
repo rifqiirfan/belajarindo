@@ -46,14 +46,14 @@ export default function ProgressPage() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Statistics</BreadcrumbPage>
+                  <BreadcrumbPage>Progress</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
         <Table>
-          <TableCaption>A list of your recent course progress.</TableCaption>
+          <TableCaption>A list of your recent course(s) progress.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>Course</TableHead>
