@@ -55,8 +55,6 @@ export const loginGoogle = async (code: string) => {
     method: "POST",
     body: JSON.stringify({
       code: code,
-      client_id: 'put client id here',
-      client_secret: 'put in here',
       redirect_uri: 'postmessage',
       grant_type: 'authorization_code',
     })
