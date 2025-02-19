@@ -4,12 +4,12 @@ import { ColumnDef } from "@tanstack/react-table";
 import { deleteLesson } from "@/core/services/lesson.service";
 import { generateSortableColumn } from "@/components/composite/datatable/sorting";
 import { SimpleAction } from "@/components/composite/datatable/misc";
-import { LessonsDataTypes } from "@/core/models/lesson.model";
+import { LessonsRelationDataTypes } from "@/core/models/lesson.model";
 
-export const columns: ColumnDef<LessonsDataTypes>[] = [
-  generateSortableColumn("course_id"),
-  generateSortableColumn("title"),
-  generateSortableColumn("content"),
+export const columns: ColumnDef<LessonsRelationDataTypes>[] = [
+  generateSortableColumn("course_name"),
+  generateSortableColumn("name"),
+  // generateSortableColumn("content"),
   generateSortableColumn("lesson_order"),
   {
     id: "action",

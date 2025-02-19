@@ -26,8 +26,8 @@ export async function getCourses({ query }: { query?: URLSearchParams | string }
 	return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
 }
 
-export async function getCoursesRelation({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesRelationDataTypes>>> {
-	const r = nextRequestChain(`${urls}-relation?${query?.toString()}`, {
+export async function getCoursesLessons({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<CoursesRelationDataTypes>>> {
+	const r = nextRequestChain(`${urls}-lessons?${query?.toString()}`, {
 		next: {
 			tags: [TAGS],
 		}

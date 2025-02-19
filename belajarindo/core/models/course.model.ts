@@ -13,7 +13,7 @@ const zCoursesSchemaDefault = z.object({
 export type CoursesDataTypes = z.infer<typeof zCoursesSchemaDefault>;
 
 export const zCoursesWithRelation = zCoursesSchemaDefault.extend({
-  total_lesson: zFallbackNumber(),
+  total_lessons: zFallbackNumber(),
 });
 
 export type CoursesRelationDataTypes = z.infer<typeof zCoursesWithRelation>;

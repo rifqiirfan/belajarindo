@@ -17,15 +17,14 @@ const PICK_FILTER: any = () => {
 }
 
 export default async function LessonsDatatable({ searchParams }: Omit<PageProps, "params">) {
-  const { data: query } = datatableStateSchemaOld.safeParse(searchParams)
-
+  const q = await searchParams;
+  const { data: query } = datatableStateSchemaOld.safeParse(q)
+  
   const res = await getLessonsRelation({
     query: transformQueryOld(query!, zLessons.BASE.pick(PICK_FILTER()).keyof().options),
   })
 
   const { data, rowCount } = res
-
-  const { data: parsedData = [] } = zLessons.LIST.safeParse(data)
 
   return (
     <>
@@ -34,7 +33,7 @@ export default async function LessonsDatatable({ searchParams }: Omit<PageProps,
         message={res.success ? res?.message : ""}
         error={!res.success ? res?.error : ""}
       />
-      <DatatableWrapperRouter data={parsedData} columns={columns} rowCount={rowCount}>
+      <DatatableWrapperRouter data={data} columns={columns} rowCount={rowCount}>
         <SimpleDatatableTemplate
           search={<FilterRouter fields={PICK_FILTER()} placeholder={"Search..."} />}
           actions={

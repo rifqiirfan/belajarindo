@@ -17,7 +17,8 @@ const PICK_FILTER: any = () => {
 }
 
 export default async function UsersDatatable({ searchParams }: Omit<PageProps, "params">) {
-  const { data: query } = datatableStateSchemaOld.safeParse(searchParams)
+  const q = await searchParams;
+  const { data: query } = datatableStateSchemaOld.safeParse(q)
 
   const res = await getUsers({
     query: transformQueryOld(query!, zUsers.BASE.pick(PICK_FILTER()).keyof().options),

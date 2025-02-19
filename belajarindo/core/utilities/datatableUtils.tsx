@@ -20,7 +20,7 @@ export const transformFiltersOld = (columnFilters: ColumnFiltersOld) => {
 }
 
 export const transformQueryOld = (query: DatatableQueryParamsOld, keys: string[] = []) => {
-  const generalSearch: ColumnFiltersOld = query?.q ?
+  const generalSearch: ColumnFiltersOld = query.q ?
     keys.map((k, i) => ({ id: k, value: query.q || "", operator: "ilike", condition: i === 0 ? "and" : "or" }))
     : []
 
@@ -33,6 +33,8 @@ export const transformQueryOld = (query: DatatableQueryParamsOld, keys: string[]
       ...generalSearch,
     ])),
   }
+
+  console.log({obj})
 
   return new URLSearchParams(obj)
 }

@@ -4,7 +4,7 @@ import { baseModel } from "./base_model";
 
 const zLessonsSchemaDefault = z.object({
   id: z.number(),
-  title: zFallbackString(),
+  name: zFallbackString(),
   content: zFallbackString(),
   audio_url: zFallbackString(),
   video_url: zFallbackString(),

@@ -179,8 +179,6 @@ export function sParamComboboxGeneral(search: string, fields: string = 'id,name'
 		fields: fields
 	}
 
-	console.log(obj.filter)
-
 	const queryParams = Object.entries(obj)
 		.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
 		.join('&');
