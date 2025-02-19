@@ -53,7 +53,7 @@ export default function ProgressPage() {
           </div>
         </header>
         <Table>
-          <TableCaption>A list of your recent course progress.</TableCaption>
+          <TableCaption>A list of your recent course(s) progress.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>Course</TableHead>
