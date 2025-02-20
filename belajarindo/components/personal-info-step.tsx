@@ -67,6 +67,7 @@ export default function PersonalInfoStep({ formData, updateFormData }: PersonalI
           id="fullName"
           value={formData.fullName}
           onChange={(e) => updateFormData({ fullName: e.target.value })}
+          placeholder="Enter your full name"
           required
         />
       </div>

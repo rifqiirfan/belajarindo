@@ -20,6 +20,7 @@ export default function ContactInfoStep({ formData, updateFormData }: ContactInf
           type="email"
           value={formData.email}
           onChange={(e) => updateFormData({ email: e.target.value })}
+          placeholder="Enter your email address"
           required
         />
       </div>
@@ -30,6 +31,7 @@ export default function ContactInfoStep({ formData, updateFormData }: ContactInf
           type="tel"
           value={formData.phone}
           onChange={(e) => updateFormData({ phone: e.target.value })}
+          placeholder="Enter your phone number (ex. +628112233445)"
           required
         />
       </div>
@@ -39,6 +41,7 @@ export default function ContactInfoStep({ formData, updateFormData }: ContactInf
           id="address"
           value={formData.address}
           onChange={(e) => updateFormData({ address: e.target.value })}
+          placeholder="Enter your address"
           required
         />
       </div>
