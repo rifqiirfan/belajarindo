@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import QuizLesson from './quiz';
-import { getQuizzesByLesson } from '@/core/services/quiz.service';
+import { getQuizzesOneByLesson } from '@/core/services/quiz.service';
 import { getLessonById } from '@/core/services/lesson.service';
 
 export const metadata = {
@@ -11,7 +11,7 @@ export const metadata = {
 
 export default async function Page({ params }: { params: { id: string, lecture: string } }) {
   const { id, lecture } = await params
-  const [lesson, quiz] = await Promise.all([getLessonById({id}), getQuizzesByLesson({ lesson_id: lecture }) as any])
+  const [lesson, quiz] = await Promise.all([getLessonById({id}), getQuizzesOneByLesson({ lesson_id: lecture }) as any])
 
   const { data } = lesson;
   return (
@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: { id: string, lecture: 
         <p>Most Indonesians prefer to say &quot;<em>Selamat siang</em>&quot; from 10 a.m. to 2 p.m., while &quot;<em>Selamat sore</em>&quot; is from 3 p.m. until sunset. After sunset, we can use &quot;<em>Selamat malam</em>&quot; until midnight.</p>
       </div>
 
-      <QuizLesson quizzes={quiz?.data} />
+      <QuizLesson type={'bipa_1'} course_id={id} quizzes={quiz?.data} />
     </div>
   )
 }

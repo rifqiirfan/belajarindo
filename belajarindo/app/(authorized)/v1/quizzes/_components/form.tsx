@@ -1,6 +1,6 @@
 "use client"
 
-import { InputBasic, InputCombobox, TextareaBasic } from "@/components/inputs";
+import { InputBasic, InputCombobox, InputSelect, TextareaBasic } from "@/components/inputs";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useLoading } from "@/components/providers/fullscreen-loading";
@@ -15,6 +15,13 @@ import { sParamComboboxGeneral } from "@/core/utilities/zodUtils";
 import { QuizzesDataTypes, zQuizzes } from "@/core/models/quiz.model";
 import { createQuiz, updateQuiz } from "@/core/services/quiz.service";
 import { getLessons } from "@/core/services/lesson.service";
+
+const optionsCorrectAnswer = [
+  { label: 'Option 1', value: 'option_1' },
+  { label: 'Option 2', value: 'option_2' },
+  { label: 'Option 3', value: 'option_3' },
+  { label: 'Option 4', value: 'option_4' }
+]
 
 export default function FormQuizzes({ data, type }: FormPageProps) {
   const [, setLoading] = useLoading()
@@ -70,16 +77,24 @@ export default function FormQuizzes({ data, type }: FormPageProps) {
                 queryKey: ["lesson_id"],
                 queryFn: async ({ search }) => {
                   const query = sParamComboboxGeneral(search, "id,name");
-                  const { data = [] } = await getLessons({ query });
+                  const { data = [] } = await getLessons({ query })
                   return data.map((v) => ({
-                    label: v.title,
-                    value: v.id,
+                    label: v.name,
+                    value: String(v.id),
                   }));
                 },
               }}
             />
+            
             <TextareaBasic name={"question_text"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"correct_answer"} required={true} disabled={type === "detail"} />
+            <InputSelect
+              name={"correct_answer"}
+              required={true}
+              disabled={type === "detail"}
+              label="Correct Answer"
+              options={optionsCorrectAnswer}
+            />
+
             <InputBasic name={"option_1"} required={true} disabled={type === "detail"} />
             <InputBasic name={"option_2"} required={true} disabled={type === "detail"} />
             <InputBasic name={"option_3"} required={true} disabled={type === "detail"} />

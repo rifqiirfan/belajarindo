@@ -72,7 +72,7 @@ export default function FormLessons({ data, type }: FormPageProps) {
                   const { data = [] } = await getCourses({ query });
                   return data.map((v) => ({
                     label: v.name,
-                    value: v.id,
+                    value: String(v.id),
                   }));
                 },
               }}

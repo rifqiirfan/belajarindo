@@ -28,7 +28,7 @@ type InputComboboxProps = {
     queryKey: string[]
     queryFn: ({ search, value }: {
       search: string,
-      value: string,
+      value: string | number,
       disabled: boolean | undefined
     }) => Promise<Option[]>
   }

@@ -73,7 +73,7 @@ export default function FormUsers({ data, type }: FormPageProps) {
                   const { data = [] } = await getLessons({ query });
                   return data.map((v) => ({
                     label: v.title,
-                    value: v.id,
+                    value: String(v.id),
                   }));
                 },
               }}

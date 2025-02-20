@@ -5,6 +5,8 @@ import { CsxModalBase } from '@/components/composite/modal';
 import { useState } from 'react';
 import { QuizzesDataTypes, QuizzesRelationDataTypes } from '@/core/models/quiz.model';
 import QuizzesList from '@/app/(authorized)/course/_components/quiz-list';
+import Link from 'next/link';
+import { IPassedBipa, LabelEnum, replaceUnderscore } from '@/app/(authorized)/course/_components/types';
 
 const questions: QuizzesDataTypes[] = [
   {
@@ -20,41 +22,24 @@ const questions: QuizzesDataTypes[] = [
     created_at: '',
     updated_at: ''
   },
-  // {
-  //   question_text: "Which planet is known as the Red Planet?",
-  //   lesson_id: 2,
-  //   correct_answer: "option_3",
-  //   option_1: "Venus",
-  //   option_2: "Jupiter",
-  //   option_3: "Mars",
-  //   option_4: "Saturn",
-  //   id: 0,
-  //   question_type: '',
-  //   created_at: '',
-  //   updated_at: ''
-  // },
-  // {
-  //   question_text: "What is the largest mammal in the world?",
-  //   lesson_id: 3,
-  //   correct_answer: "option_2",
-  //   option_1: "African Elephant",
-  //   option_2: "Blue Whale",
-  //   option_3: "Giraffe",
-  //   option_4: "Hippopotamus",
-  //   id: 0,
-  //   question_type: '',
-  //   created_at: '',
-  //   updated_at: ''
-  // },
 ]
 
-export default function QuizLesson({ quizzes }: { quizzes: QuizzesRelationDataTypes[] }) {
+export default function QuizLesson({ type, course_id, quizzes }: { type: IPassedBipa, course_id: string, quizzes: QuizzesRelationDataTypes[] }) {
+  const label = LabelEnum[type] ?? ''
   const [open, setOpen] = useState(false)
+
   return (
     <>
-      <Button onClick={() => setOpen(!open)} className='max-w-40' variant={'default'}>Finish Lesson</Button>
+      <div className='flex gap-2'>
+        <Button onClick={() => setOpen(!open)} className='max-w-lg' variant={'default'}>Finish Lesson</Button>
+        <Button className='max-w-lg' variant={'outline'} asChild>
+          <Link href={`/course/${label}/${replaceUnderscore(type)}/${course_id}`}>
+            Back to Lessons
+          </Link>
+        </Button>
+      </div>
       <CsxModalBase open={open} setOpen={setOpen} title={'Quiz'} className="flex flex-1 flex-col min-w-[768px]">
-        <QuizzesList questions={questions} />
+        <QuizzesList questions={quizzes} />
       </CsxModalBase>
     </>
   )

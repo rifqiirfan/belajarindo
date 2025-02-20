@@ -42,8 +42,8 @@ export async function getQuizzesRelation({ query }: { query?: URLSearchParams | 
   return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
 }
 
-export async function getQuizzesByLesson({ lesson_id, query }: { lesson_id: string, query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<QuizzesRelationDataTypes>>> {
-  const r = nextRequestChain(`${urls}-lessons/${lesson_id}?${query?.toString()}`, {
+export async function getQuizzesOneByLesson({ lesson_id, query }: { lesson_id: string, query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<QuizzesRelationDataTypes>>> {
+  const r = nextRequestChain(`${urls}-random-one/${lesson_id}?${query?.toString()}`, {
     next: {
       tags: [TAGS],
     }
