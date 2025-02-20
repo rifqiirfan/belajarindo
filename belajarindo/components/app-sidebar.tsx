@@ -55,7 +55,7 @@ const data = {
         },
         {
           title: "Advanced BIPA 6-7",
-          url: "/course/advanced/bipa-6-7",
+          url: "/course/advanced/bipa-6",
         },
       ],
     },

@@ -33,9 +33,7 @@ export const transformQueryOld = (query: DatatableQueryParamsOld, keys: string[]
       ...generalSearch,
     ])),
   }
-
-  console.log({obj})
-
+  
   return new URLSearchParams(obj)
 }
 

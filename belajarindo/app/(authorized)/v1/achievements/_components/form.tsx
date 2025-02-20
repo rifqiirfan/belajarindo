@@ -1,6 +1,6 @@
 "use client"
 
-import { InputBasic, TextareaBasic } from "@/components/inputs";
+import { InputBasic, InputSelect, TextareaBasic } from "@/components/inputs";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useLoading } from "@/components/providers/fullscreen-loading";
@@ -12,6 +12,16 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createAchievement, updateAchievement } from "@/core/services/achievement.service";
 import Link from "next/link";
+
+const optionsLevel = [
+  { label: 'Bipa 1', value: 'bipa-1' },
+  { label: 'Bipa 2', value: 'bipa-2' },
+  { label: 'Bipa 3', value: 'bipa-3' },
+  { label: 'Bipa 4', value: 'bipa-4' },
+  { label: 'Bipa 5', value: 'bipa-5' },
+  { label: 'Bipa 6', value: 'bipa-6' },
+  { label: 'Bipa 7', value: 'bipa-7' },
+]
 
 export default function FormAchievement({ data, type }: FormPageProps) {
   const [, setLoading] = useLoading()
@@ -60,7 +70,14 @@ export default function FormAchievement({ data, type }: FormPageProps) {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <InputBasic name={"name"} required={true} disabled={type === "detail"} />
             <TextareaBasic name={"description"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"reward_point"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"achieve_point"} required={true} disabled={type === "detail"} />
+            <InputSelect
+              name={"difficulty_level"}
+              required={true}
+              disabled={type === "detail"}
+              label="Level"
+              options={optionsLevel}
+            />
             <InputBasic name={"icon_url"} required={true} disabled={type === "detail"} />
 
             <div className="flex gap-2">

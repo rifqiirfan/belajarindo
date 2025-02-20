@@ -10,6 +10,22 @@ import { Check, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { QuizzesDataTypes } from "@/core/models/quiz.model"
 
+const exampleQuestions: QuizzesDataTypes[] = [
+  {
+    question_text: "What 'Morning' means in indonesia?",
+    lesson_id: 1,
+    correct_answer: "option_1",
+    option_1: "Pagi",
+    option_2: "Siang",
+    option_3: "Sore",
+    option_4: "Malam",
+    id: 0,
+    question_type: '',
+    created_at: '',
+    updated_at: ''
+  },
+]
+
 interface QuizListProps {
   questions: QuizzesDataTypes[]
 }

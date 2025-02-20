@@ -6,7 +6,7 @@ const zAchievementsSchemaDefault = z.object({
   id: z.number(),
   name: zFallbackString(),
   description: zFallbackString(),
-  reward_point: zFallbackNumber(),
+  achieve_point: zFallbackNumber(),
   icon_url: zFallbackString(),
 }).merge(baseModel);
 
@@ -21,7 +21,7 @@ export type AchievementsRelationDataTypes = z.infer<typeof zAchievementsWithRela
 const zFormAchievementsRules = z.object({
   name: zFieldText('name'),
   description: zFieldText('description'),
-  reward_point: zFieldText('reward_point'),
+  achieve_point: zFieldText('achieve_point'),
   icon_url: zFieldText('icon_url'),
 });
 
