@@ -1,6 +1,6 @@
 "use client"
 
-import { InputBasic, InputCombobox, TextareaBasic } from "@/components/inputs";
+import { DatePickerBasic, InputBasic, InputCombobox, InputSelect, TextareaBasic } from "@/components/inputs";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useLoading } from "@/components/providers/fullscreen-loading";
@@ -61,33 +61,28 @@ export default function FormUsers({ data, type }: FormPageProps) {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <InputCombobox
-              name={"lesson_id"}
+
+            <InputBasic name={"full_name"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"email"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"username"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"password"} required={true} disabled={type === "detail"} />
+            <DatePickerBasic name={"join_date"} required={true} disabled={type === "detail"} label={'Join Date'} />
+            <InputSelect
+              name={"role"}
               required={true}
               disabled={type === "detail"}
-              onSelect={async ({ option }) => { }}
-              queryOptions={{
-                queryKey: ["lesson_id"],
-                queryFn: async ({ search, value }) => {
-                  const query = sParamComboboxGeneral(search, "id,name");
-                  const { data = [] } = await getLessons({ query });
-                  return data.map((v) => ({
-                    label: v.title,
-                    value: String(v.id),
-                  }));
-                },
-              }}
+              label="Role"
+              options={[
+                { label: 'user', value: 'user' },
+                { label: 'admin', value: 'admin' },
+              ]}
             />
-            <TextareaBasic name={"question_text"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"correct_answer"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"option_1"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"option_2"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"option_3"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"option_4"} required={true} disabled={type === "detail"} />
-
+            <InputBasic name={"experience_points"} defaultValue={100} required={true} disabled={type === "detail"} />
+            <DatePickerBasic name={"date_of_birth"} required={true} disabled={type === "detail"} label={'Date of Birth'} />
+            <InputBasic name={"country"} required={true} disabled={type === "detail"} />
             <div className="flex gap-2">
               {type !== "detail" && <Button type="submit">Submit</Button>}
-              <Button type="button" variant={'outline'} asChild><Link href={'/v1/Users'}>Back</Link></Button>
+              <Button type="button" variant={'outline'} asChild><Link href={'/v1/users'}>Back</Link></Button>
             </div>
           </form>
         </Form>

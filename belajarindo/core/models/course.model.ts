@@ -22,6 +22,7 @@ const zFormCoursesRules = z.object({
   name: zFieldText('name'),
   description: zFieldText('description'),
   difficulty_level: zFieldText('difficulty_level'),
+  creation_date: zFieldText('creation_date'),
 });
 
 export const zCourses = {
