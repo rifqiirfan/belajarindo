@@ -60,7 +60,7 @@ export default function FormAchievement({ data, type }: FormPageProps) {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <InputBasic name={"name"} required={true} disabled={type === "detail"} />
             <TextareaBasic name={"description"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"reward_point"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"achieve_point"} required={true} disabled={type === "detail"} />
             <InputBasic name={"icon_url"} required={true} disabled={type === "detail"} />
 
             <div className="flex gap-2">
