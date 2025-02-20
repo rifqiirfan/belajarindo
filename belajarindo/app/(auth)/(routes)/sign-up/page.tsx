@@ -18,6 +18,7 @@ import {
 import PersonalInfoStep from "@/components/personal-info-step"
 import ContactInfoStep from "@/components/contact-info-step"
 import AccountInfoStep from "@/components/account-info-step"
+import {signup} from "@/core/features/SIgnup/signup.service";
 
 const personalInfoSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -102,10 +103,21 @@ export default function SignUp() {
     setStep((prev) => Math.max(prev - 1, 1))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (validateStep()) {
       console.log("Form submitted:", formData)
+      const newData = {
+        ...formData,
+        full_name: formData.fullName,
+        dob: formData.dateOfBirth
+      }
+      const res = await signup({data: newData})
+      if (!res?.success && res.error) {
+        toast.error("Sign up failed. " + res.error)
+        return
+      }
+      toast.success("Sign up success.")
       // Here you would typically send the data to your server
     }
   }

@@ -60,7 +60,7 @@ export async function processResponse(promise: Promise<Response>, options: {}): 
   }
 }
 
-export async function validateResponse(response: Response, options: { extend?: (response: Response,) => ActionResponse<{}> }): Promise<ActionResponse<{}>> {
+export async function validateResponse(response: Response, options: { extend?: (response: Response,) => Promise<ActionResponse<{}>> }): Promise<ActionResponse<{}>> {
   if (response.status === 401) {
     return {
       success: false,
@@ -75,7 +75,7 @@ export async function validateResponse(response: Response, options: { extend?: (
     }
   }
 
-  const extend = options.extend?.(response)
+  const extend = await options.extend?.(response)
   if (extend) return extend
 
   return {
