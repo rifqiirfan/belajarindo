@@ -8,31 +8,30 @@ export const metadata = {
 export default async function AchievementPage() {
   const res = await getLessonsDashboard({});
   const { data } = res;
-  console.log({res})
 
   const achievements = [
     {
       name: 'Beginner',
       bipa: 'BIPA 1 and BIPA 2',
       color: 'green',
-      total_enrolled: data?.beginner ?? 0,
-      progress: 10,
+      total_enrolled: data?.beginner?.enrolled ?? 0,
+      progress: data?.beginner?.progress ?? 0,
       achievement: 10
     },
     {
       name: 'Intermediate',
       bipa: 'BIPA 3 and BIPA 4',
       color: 'cyan',
-      total_enrolled: data?.intermediate ?? 0,
-      progress: 10,
+      total_enrolled: data?.intermediate?.enrolled ?? 0,
+      progress: data?.intermediate?.progress ?? 0,
       achievement: 10
     },
     {
       name: 'Advanced',
       bipa: 'BIPA 5, BIPA6, and BIPA 7',
       color: 'pink',
-      total_enrolled: data?.advanced ?? 0,
-      progress: 10,
+      total_enrolled: data?.advanced?.enrolled ?? 0,
+      progress: data?.advanced?.progress ?? 0,
       achievement: 10
     }
   ]

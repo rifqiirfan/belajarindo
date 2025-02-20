@@ -54,7 +54,7 @@ const chartConfig = {
 export default function StatisticsPage() {
   return (
     <div className="flex flex-1 flex-col gap-8 p-8">
-      <div className="grid auto-rows-min gap-8 md:grid-cols-3">
+      {/* <div className="grid auto-rows-min gap-8 md:grid-cols-3">
         <Card className="bg-green-400">
           <CardHeader>
             <CardTitle>Beginner</CardTitle>
@@ -100,7 +100,7 @@ export default function StatisticsPage() {
             </div>
           </CardFooter>
         </Card>
-      </div>
+      </div> */}
       <div className="grid auto-rows-min gap-8 md:grid-cols-2">
         <Card>
           <CardHeader>
