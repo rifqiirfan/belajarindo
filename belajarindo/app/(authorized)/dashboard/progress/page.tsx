@@ -13,11 +13,10 @@ export default function Page({ searchParams }: PageProps) {
   return (
     <ProtectDefault role="org:admin,org:user">
       {/* <Large>Achievements</Large> */}
-      <div className="bg-white">
-        <Suspense fallback={<SkeletonDatatable />}>
-          <MyProgressDatatable searchParams={searchParams} />
-        </Suspense>
-      </div>
+
+      <Suspense fallback={<SkeletonDatatable />}>
+        <MyProgressDatatable searchParams={searchParams} />
+      </Suspense>
     </ProtectDefault>
   )
 }
