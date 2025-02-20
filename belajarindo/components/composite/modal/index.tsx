@@ -2,7 +2,6 @@ import { Dialog as ShadcnDialog, DialogContent, DialogTrigger, DialogClose, Dial
 import { cn } from "@/lib/utils"
 import { Maximize2, Minimize2, X } from "lucide-react"
 import { Dispatch, SetStateAction, useState } from "react"
-import { TooltipBasic } from "../tooltip"
 import { Button } from "@/components/ui/button"
 import { DialogDescription } from "@radix-ui/react-dialog"
 
@@ -39,24 +38,19 @@ export function CsxModalBase({ open, setOpen, trigger, children, className, titl
             </DialogTitle>
             <DialogDescription className="sr-only">{title}</DialogDescription>
             <div className="flex gap-2">
-              <TooltipBasic message={'Expand Modal'}>
-                <Button onClick={toggleFullscreen} size={'icon'} variant={'link'}>
-                  {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
-                </Button>
-              </TooltipBasic>
-              <TooltipBasic message={'Close Modal'}>
+              <Button onClick={toggleFullscreen} size={'icon'} variant={'link'} className="text-slate-400 size-6">
+                {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+              </Button>
+              <Button size={'icon'} variant={'link'} className="text-red-500 size-6 hover:bg-slate-200" asChild>
                 <DialogClose className="opacity-90 transition-opacity hover:opacity-100">
-                  <Button size={'icon'} variant={'link'} className="text-red-500">
-                    <X className="w-4 h-4" />
-                  </Button>
-                  <span className="sr-only">Close</span>
+                  <X className="w-4 h-4" />
                 </DialogClose>
-              </TooltipBasic>
+              </Button>
             </div>
           </div>
           <div className="flex-grow overflow-auto p-4">{children}</div>
         </div>
       </DialogContent>
-    </ShadcnDialog>
+    </ShadcnDialog >
   )
 }

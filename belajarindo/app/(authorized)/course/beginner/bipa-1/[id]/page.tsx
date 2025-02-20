@@ -3,7 +3,7 @@ import LessonCard from "../../../_components/lesson-card"
 import { getCourseById } from "@/core/services/course.service"
 
 export const metadata = {
-  title: 'BIPA 1 Lessons | Belajar Indo',
+  title: 'BIPA 1 Course Lessons | Belajar Indo',
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     <>
       {course?.data && <h4 className="text-xl font-semibold my-1">{course.data?.name ?? 'No Title'}</h4>}
       <div className="grid auto-rows-min gap-3">
-        <LessonCard data={data ?? []} />
+        <LessonCard type={'bipa_1'} course={course?.data} data={data ?? []} />
       </div>
     </>
   )

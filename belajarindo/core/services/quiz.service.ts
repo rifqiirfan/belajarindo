@@ -42,6 +42,22 @@ export async function getQuizzesRelation({ query }: { query?: URLSearchParams | 
   return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
 }
 
+export async function getQuizzesByLesson({ lesson_id, query }: { lesson_id: string, query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<QuizzesRelationDataTypes>>> {
+  const r = nextRequestChain(`${urls}-lessons/${lesson_id}?${query?.toString()}`, {
+    next: {
+      tags: [TAGS],
+    }
+  }).withAuth({ cache: false })
+
+  const payload = await transformResponse<GetData<QuizzesRelationDataTypes>>(r.getWithFetch(), r.getRequestAndData())
+
+  if (!payload.success) {
+    return getOnErrorDatatableResponse({ error: payload.error })
+  }
+
+  return getOnSuccessDatatableResponse({ message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count })
+}
+
 export async function getQuizById({ id, query }: { id: string, query?: URLSearchParams }): Promise<ActionResponse<ActionGetData<QuizzesDataTypes>, ActionGetData<{}>>> {
   const r = nextRequestChain(`${urls}/${id}?${query?.toString()}`, {
     next: {

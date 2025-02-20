@@ -1,8 +1,6 @@
 // import "@/app/globals.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-// import { Button } from "@/components/ui/button";
-// import { BellIcon } from "lucide-react";
 
 export default function Vertical({ children }: Readonly<{ children: React.ReactNode }>) {
   return (

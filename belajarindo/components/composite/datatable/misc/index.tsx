@@ -74,47 +74,6 @@ export function ActionDetail({children}: {children?: React.ReactNode}) {
     )
 }
 
-// export function ActionDelete({children, queryKey}: { children?: React.ReactNode, queryKey?: QueryKey }) {
-//     const queryClient = useQueryClient()
-//     const {onDelete} = useAction()
-//     const confirm = useConfirm()
-//     const [, setLoading] = useLoading()
-//
-//     const handleDelete = async () => {
-//         if (!onDelete) {
-//             return
-//         }
-//
-//         if (!await confirm({
-//             title: "Are you sure?",
-//             body: "This action cannot be undone",
-//             cancelButton: "Cancel",
-//             actionButton: "Delete",
-//         })) {
-//             return
-//         }
-//
-//         setLoading(true)
-//         try {
-//             await onDelete()
-//             if (queryKey) {
-//                 queryClient.invalidateQueries({queryKey})
-//             }
-//             toast.success("Delete Success")
-//         } catch (e: any) {
-//             toast.error(`Delete Failed. ${e?.message}`)
-//         } finally {
-//             setLoading(false)
-//         }
-//     }
-//
-//     return (
-//         <DropdownMenuItem onClick={handleDelete}>
-//             {children ?? "Delete"}
-//         </DropdownMenuItem>
-//     )
-// }
-
 export function ActionDelete({children, queryKey}: { children?: React.ReactNode, queryKey?: QueryKey }) {
     const queryClient = useQueryClient()
     const {onDelete} = useAction()

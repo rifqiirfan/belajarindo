@@ -3,7 +3,7 @@ import LessonCard from "../../../_components/lesson-card"
 import { getCourseById } from "@/core/services/course.service"
 
 export const metadata = {
-  title: 'BIPA 6 Lessons | Belajar Indo',
+  title: 'BIPA 6 Course Lessons | Belajar Indo',
 }
 
 export default async function Page({ params }: { params: { id: string } }) {

@@ -1,8 +1,5 @@
 import { toCapitalizedWords } from "@/lib/utils";
-// import { fieldConfig } from "@autoform/zod"
 import { z } from "zod"
-// import { transformFilters, transformFiltersOld, transformSortingOld } from "./datatableUtils";
-// import { ColumnFilters, ColumnFiltersOld, DatatableQueryParams } from "@/types/datatable";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 import { transformFiltersOld, transformSortingOld } from "./datatableUtils";
@@ -66,37 +63,6 @@ export const zFieldText = (label: string, isRequired: boolean = false) => {
 	return schema;
 }
 
-// export const zFieldTextarea = (label: string, isRequired: boolean = false) => {
-// 	const { column, zParamConfig } = zSetupConfig(label)
-
-// 	const schema = z.string({ ...zParamConfig })
-// 	if (isRequired) { schema.min(1, `${column} is required.`) }
-
-// 	return schema.superRefine(
-// 		fieldConfig({ fieldType: "textarea" })
-// 	);
-// }
-
-// export const zFieldCombobox = (
-// 	label: string,
-// 	options: Array<unknown> = [],
-// 	getOptions: (arg: { search: string }) => Promise<{ value: string, label: string }[]> = () => Promise.resolve([]),
-// 	uniqueKey: Array<string> = [],
-// ) => {
-// 	const { column, zParamConfig } = zSetupConfig(label)
-// 	return z.string({ ...zParamConfig }).superRefine(
-// 		fieldConfig({
-// 			label: column,
-// 			fieldType: "combobox",
-// 			customData: {
-// 				options,
-// 				getOptions,
-// 				uniqueKey
-// 			}
-// 		})
-// 	)
-// }
-
 export const zFieldNumber = (label: string) => {
 	const { zParamConfig } = zSetupConfig(label)
 	return z.coerce.number({ ...zParamConfig })
@@ -121,15 +87,6 @@ export const zFieldEmail = (label: string) => {
 	const { column, zParamConfig } = zSetupConfig(label)
 	return z.string({ ...zParamConfig }).email(`${column} is invalid`)
 }
-
-// export const zFieldPassword = (label: string) => {
-// 	const { zParamConfig } = zSetupConfig(label)
-// 	return z.string({ ...zParamConfig }).superRefine(
-// 		fieldConfig({
-// 			fieldType: "password",
-// 		})
-// 	)
-// }
 
 const uuidSchema = z.string().uuid();
 
