@@ -24,7 +24,6 @@ export const login = async (formData: { username: string, password: string }): P
   })
 
   const processed = await processResponse(fetch(r), {})
-  console.log(processed)
   if (!processed.success) {
     return processed
   }
@@ -32,7 +31,6 @@ export const login = async (formData: { username: string, password: string }): P
   const { response } = processed
 
   const payload = await response.json()
-
   if (!payload.success) {
     return {
       success: false,
@@ -47,36 +45,6 @@ export const login = async (formData: { username: string, password: string }): P
     }
   }
 
-
-  // const validated = await validateResponse(response, {
-  //   extend: async (res) => {
-  //     const payload: {success: boolean, message: string} = await res.json()
-  //     if (!payload.success) {
-  //       return {
-  //         success: false,
-  //         error: payload.message
-  //       }
-  //     }
-  //
-  //     return {
-  //       success: true,
-  //       message: "Validate response success"
-  //     }
-  //   }
-  // })
-  // console.log(validated)
-  // if (!validated.success) {
-  //   return validated
-  // }
-  //
-  // const extracted = await extractPayload<ResponseAuth>(response, {})
-  // console.log(extracted)
-  // if (!extracted.success) {
-  //   return extracted
-  // }
-  //
-  // const { payload } = extracted
-
   if (!payload.success && payload.errors) {
     return {
       success: false,
@@ -85,15 +53,18 @@ export const login = async (formData: { username: string, password: string }): P
   }
 
   await storeToken(payload.token ?? "");
+
+  /* Redirect after login */
   redirect("/")
 }
 
 export const loginGoogle = async (code: string) => {
-
   const res: any = await fetch('https://oauth2.googleapis.com/token', {
     method: "POST",
     body: JSON.stringify({
       code: code,
+      client_id: '',
+      client_secret: '',
       redirect_uri: 'postmessage',
       grant_type: 'authorization_code',
     })

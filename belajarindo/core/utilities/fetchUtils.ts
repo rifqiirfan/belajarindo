@@ -1,10 +1,11 @@
-import { cookies } from "next/headers";
+import { cookies, UnsafeUnwrappedCookies } from "next/headers";
 import { ActionResponse, GetResponse } from "@/core/types/response";
 import { NextRequest } from "next/server";
 
 // const cookieStore = await cookies();
 
 export const nextRequestChain = (...args: ConstructorParameters<typeof NextRequest>) => {
+  const cookieStore = cookies() as unknown as UnsafeUnwrappedCookies
   const [input, init = {}] = args
   
   let initRequest: any = {
@@ -12,7 +13,7 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
     headers: {
       "Access-Control-Allow-Origin": '*',
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${Nex.get("session")?.value}`,
+      "Authorization": `Bearer ${cookieStore.get("session")}`,
       ...(init.headers || {}),
     },
   }
