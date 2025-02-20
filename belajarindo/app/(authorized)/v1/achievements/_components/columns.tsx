@@ -9,6 +9,7 @@ import { AchievementsDataTypes } from "@/core/models/achievement.model";
 export const columns: ColumnDef<AchievementsDataTypes>[] = [
   generateSortableColumn("name"),
   generateSortableColumn("description"),
+  generateSortableColumn("difficulty_level", "Level"),
   generateSortableColumn("achieve_point", 'Achieve At'),
   generateSortableColumn("icon_url"),
   {
