@@ -1,4 +1,4 @@
-import { zFallbackString, zFieldText, zFallbackUuid, zFallbackDate, zFallbackNumber } from "@/core/utilities/zodUtils"
+import { zFallbackString, zFieldText, zFallbackUuid, zFallbackDate, zFallbackNumber, zFieldDate } from "@/core/utilities/zodUtils"
 import { z } from "zod"
 import { baseModel } from "./base_model";
 
@@ -22,7 +22,7 @@ const zFormCoursesRules = z.object({
   name: zFieldText('name'),
   description: zFieldText('description'),
   difficulty_level: zFieldText('difficulty_level'),
-  creation_date: zFieldText('creation_date'),
+  creation_date: zFieldDate('creation_date'),
 });
 
 export const zCourses = {
