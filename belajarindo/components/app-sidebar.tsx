@@ -19,14 +19,10 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { getToken, validateToken } from "@/core/utilities/authUtils"
 
-// This is sample data.
+/* Menus */
 const data = {
-  user: {
-    name: "John Doe",
-    email: "john.doe@aol.com",
-    avatar: "/avatar.png",
-  },
   navMain: [
     {
       title: "Browse Courses",
@@ -112,10 +108,11 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="bg-white">
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarHeader>
       <SidebarContent>
         <NavMain label="Course" items={data.navMain} />

@@ -37,7 +37,7 @@ export default async function AchievementPage() {
   ]
 
   return (
-    <div className="grid auto-rows-min gap-8 md:grid-cols-3">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
       {achievements.map((achieve, index) => (
         <AchievementCard key={index} achievement={achieve} />
       ))}

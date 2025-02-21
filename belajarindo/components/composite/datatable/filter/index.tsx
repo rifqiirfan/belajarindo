@@ -155,14 +155,6 @@ export function FilterClient({ className, placeholder }: Omit<FilterProps, "fiel
 
   useEffect(() => {
     table.setGlobalFilter(debouncedValue)
-    // const newFilter = table
-    //   .getAllColumns()
-    //   .filter((column) => column.getCanFilter())
-    //   .map((column) => ({
-    //     id: column.id,
-    //     value: debouncedValue
-    //   }))
-    // table.setColumnFilters(newFilter)
   }, [debouncedValue]);
 
   return (

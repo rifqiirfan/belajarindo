@@ -1,15 +1,4 @@
-"use client"
-
-import { AppSidebar } from "@/components/app-sidebar"
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import {
   Card,
   CardContent,
@@ -24,12 +13,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+
+import { getStatisticDashboard } from "@/core/features/Dashboard/dashboard.service";
+import ChartStatistics from "./charts";
 
 const chartData = [
   { month: "January", desktop: 0, achievement: 0 },
@@ -51,7 +37,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export default function StatisticsPage() {
+export default async function Page() {
+  const res = await getStatisticDashboard({})
+  // const { data, rowCount } = res
+  console.log({res})
+
   return (
     <div className="flex flex-1 flex-col gap-8 p-8">
       {/* <div className="grid auto-rows-min gap-8 md:grid-cols-3">
@@ -101,73 +91,8 @@ export default function StatisticsPage() {
           </CardFooter>
         </Card>
       </div> */}
-      <div className="grid auto-rows-min gap-8 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Points collected</CardTitle>
-            <CardDescription>January - June 2025</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ChartContainer config={chartConfig}>
-              <BarChart
-                accessibilityLayer
-                data={chartData}
-                margin={{
-                  top: 20,
-                }}
-              >
-                <CartesianGrid vertical={false} />
-                <XAxis
-                  dataKey="month"
-                  tickLine={false}
-                  tickMargin={10}
-                  axisLine={false}
-                  tickFormatter={(value) => value.slice(0, 3)}
-                />
-                <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-                <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
-                  <LabelList position="top" offset={12} className="fill-foreground" fontSize={12} />
-                </Bar>
-              </BarChart>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col items-start gap-2 text-sm">
-            <div className="leading-none text-muted-foreground">Showing points collected by the user for the last 6 months</div>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Achievement received</CardTitle>
-            <CardDescription>January - June 2025</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ChartContainer config={chartConfig}>
-              <BarChart
-                accessibilityLayer
-                data={chartData}
-                margin={{
-                  top: 20,
-                }}
-              >
-                <CartesianGrid vertical={false} />
-                <XAxis
-                  dataKey="month"
-                  tickLine={false}
-                  tickMargin={10}
-                  axisLine={false}
-                  tickFormatter={(value) => value.slice(0, 3)}
-                />
-                <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-                <Bar dataKey="achievement" fill="var(--color-desktop)" radius={8}>
-                  <LabelList position="top" offset={12} className="fill-foreground" fontSize={12} />
-                </Bar>
-              </BarChart>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col items-start gap-2 text-sm">
-            <div className="leading-none text-muted-foreground">Showing achievement received by the user for the last 6 months</div>
-          </CardFooter>
-        </Card>
+      <div className="grid gap-4">
+        <ChartStatistics config={chartConfig} data={chartData} />
       </div>
     </div>
 
