@@ -76,8 +76,8 @@ export default function FormUsers({data, type}: FormPageProps) {
               disabled={type === "detail"}
               label="Role"
               options={[
-                {label: 'user', value: 'user'},
-                {label: 'admin', value: 'admin'},
+                {label: 'user', value: 'USER'},
+                {label: 'admin', value: 'ADMIN'},
               ]}
             />
             <InputBasic name={"experience_points"} required={true} disabled={type === "detail"}/>
