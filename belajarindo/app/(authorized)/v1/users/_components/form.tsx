@@ -85,9 +85,6 @@ export default function FormUsers({data, type}: FormPageProps) {
                              label={'Date of Birth'}/>
             <InputBasic name={"country"} required={true} disabled={type === "detail"}/>
             <div className="flex gap-2">
-              <pre>
-                {JSON.stringify(form.formState.errors, null, 2)}
-              </pre>
               {type !== "detail" && <Button type="submit">Submit</Button>}
               <Button type="button" variant={'outline'} asChild><Link href={'/v1/users'}>Back</Link></Button>
             </div>
