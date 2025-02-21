@@ -13,7 +13,7 @@ export async function Protect({ role, fallback, children }: { role: string, fall
       return false;
     }
     
-    return ("org:" + USER_ROLE.toLowerCase()) === requiredRole;
+    return ("org:" + USER_ROLE?.toLowerCase()) === requiredRole;
   });
 
   if (hasRequiredRole) {
