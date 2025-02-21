@@ -4,7 +4,7 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 export async function Protect({ role, fallback, children }: { role: string, fallback: React.ReactNode, children: React.ReactNode }) {
-  // const USER_ROLE = await getRoles();
+  const USER_ROLE = await getRoles();
   const requiredRoles = role.split(',').map(r => r.trim());
 
   /* Only consider roles with "org:" prefix as required. */
@@ -12,9 +12,8 @@ export async function Protect({ role, fallback, children }: { role: string, fall
     if (!requiredRole.startsWith("org:")) {
       return false;
     }
-
-    return true;
-    // return ("org:" + USER_ROLE) === requiredRole;
+    
+    return ("org:" + USER_ROLE.toLowerCase()) === requiredRole;
   });
 
   if (hasRequiredRole) {

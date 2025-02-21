@@ -23,10 +23,6 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // if (preventUrl.includes(pathname)) {
-  //   return NextResponse.rewrite(new URL("/not-found", req.url));
-  // }
-
   try {
     const jwt = req.cookies.get('session')?.value || "";
     const payload = await validateToken(jwt);

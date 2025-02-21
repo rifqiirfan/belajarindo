@@ -12,9 +12,10 @@ enum Roles {
 }
 
 type Payload = {
-  id: string
+  userId: string
   username: string
-  roles: string
+  email: string
+  role: string
   full_name: string
   iat: number
   exp: number
@@ -50,11 +51,11 @@ const validateToken = async (token: string) => {
 const getRoles = async () => {
   try {
     const payload = await validateToken(await getToken())
-    return payload.roles
+    return payload.role
   } catch (e: any) {
     console.info(e)
     await removeToken()
-    redirect("/auth/login")
+    redirect("/log-in")
   }
 }
 
@@ -78,7 +79,7 @@ const isAuthorized = async (roles: string[]) => {
 
 const logout = async () => {
   await removeToken()
-  redirect("/login")
+  redirect("/log-in")
 }
 
 export {

@@ -1,6 +1,6 @@
 "use client"
 
-import { InputBasic, InputCombobox, InputSelect, TextareaBasic } from "@/components/inputs";
+import { DatePickerBasic, InputBasic, InputCombobox, InputSelect, TextareaBasic } from "@/components/inputs";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useLoading } from "@/components/providers/fullscreen-loading";
@@ -79,7 +79,7 @@ export default function FormLessons({ data, type }: FormPageProps) {
               label="Level"
               options={optionsLevel}
             />
-
+            <DatePickerBasic name={"creation_date"} required={true} disabled={type === "detail"} label={'Creation Date'} />
             <div className="flex gap-2">
               {type !== "detail" && <Button type="submit">Submit</Button>}
               <Button type="button" variant={'outline'} asChild><Link href={'/v1/courses'}>Back</Link></Button>

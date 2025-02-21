@@ -49,42 +49,5 @@ export default function CourseCard({ type, data }: { type: IPassedBipa, data: an
         </Card>
       ))}
     </>
-
-
-    // <Card className="w-full max-w-4xl overflow-hidden">
-    //   <div className="grid grid-cols-1 md:grid-cols-[2fr,3fr]">
-    //     {/* Left side with gradient background */}
-    //     <div className="relative min-h-[200px] md:min-h-[280px]">
-    //       <Image
-    //         src={"/beginner_bipa-1_card.png"}
-    //         alt={"Beginner BIPA 1"}
-    //         width={480}
-    //         height={200}
-    //         className="object-cover"
-    //         sizes="(max-width: 768px) 100vw, 40vw"
-    //         priority
-    //       />
-    //     </div>
-
-    //     {/* Right side with content */}
-    //     <div className="p-6 md:p-8 bg-white">
-    //       <div className="space-y-6">
-    //         <div className="space-y-4">
-    //           <h3 className="text-2xl font-semibold tracking-tight">Introduction</h3>
-    //           <Badge variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-200">
-    //             Beginner
-    //           </Badge>
-    //         </div>
-
-    //         <p className="text-muted-foreground">
-    //           Type the description here. This section can contain details about the lesson, its objectives, and what
-    //           students will learn.
-    //         </p>
-
-    //         <Button className="bg-yellow-400 hover:bg-yellow-500 text-yellow-950">Start lesson</Button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </Card>
   )
 }
