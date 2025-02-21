@@ -8,9 +8,12 @@ import {toast} from "sonner";
 export function GoogleLogInButton() {
   const login = useGoogleLogin({
     onSuccess: async (codeResponse) => {
-      console.log({codeResponse})
-      await loginGoogle(codeResponse.code)
-      // toast.success("Login Success")
+      const res = await loginGoogle(codeResponse.code)
+      if (!res?.success && res?.error) {
+        toast.error("Failed to login. " + res.error)
+        return
+      }
+      toast.success("Login Success")
     },
     onError: (error) => {
       toast.error(error.error)

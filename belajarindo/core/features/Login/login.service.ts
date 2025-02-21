@@ -90,25 +90,25 @@ export const login = async (formData: { username: string, password: string }): P
 
 export const loginGoogle = async (code: string) => {
 
-  const res: any = await fetch('https://oauth2.googleapis.com/token', {
-    method: "POST",
-    body: JSON.stringify({
-      code: code,
-      redirect_uri: 'postmessage',
-      grant_type: 'authorization_code',
-    })
-  }
-  ).then(r => r.json())
-
-  const accessToken = res?.access_token;
-  const userInfo: any = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + accessToken,
-      "Content-Type": "application/json"
-    }
-  }
-  ).then(r => r.json())
+  // const res: any = await fetch('https://oauth2.googleapis.com/token', {
+  //   method: "POST",
+  //   body: JSON.stringify({
+  //     code: code,
+  //     redirect_uri: 'postmessage',
+  //     grant_type: 'authorization_code',
+  //   })
+  // }
+  // ).then(r => r.json())
+  //
+  // const accessToken = res?.access_token;
+  // const userInfo: any = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+  //   method: "GET",
+  //   headers: {
+  //     Authorization: "Bearer " + accessToken,
+  //     "Content-Type": "application/json"
+  //   }
+  // }
+  // ).then(r => r.json())
 
   /**
    * result was 
@@ -135,22 +135,19 @@ export const loginGoogle = async (code: string) => {
 
   const { response } = processed
 
-  const validated = await validateResponse(response, {})
-  if (!validated.success) {
-    return validated
-  }
+  const payload = await response.json()
 
-  const extracted = await extractPayload<ResponseAuth>(response, {})
-  if (!extracted.success) {
-    return extracted
-  }
-
-  const { payload } = extracted
-
-  if (!payload.success && payload.errors) {
+  if (!payload.success) {
     return {
       success: false,
-      error: Object.values(payload.errors).flat().join(", ")
+      error: payload.message
+    }
+  }
+
+  if (response.status >= 400) {
+    return {
+      success: false,
+      error: payload.message
     }
   }
 
