@@ -44,37 +44,7 @@ export const signup = async ({data}: {data: Record<string, any>}) => {
       error: payload.message
     }
   }
-
-
-  // const validated = await validateResponse(response, {
-  //   extend: async (res) => {
-  //     const payload: {success: boolean, message: string} = await res.json()
-  //     if (!payload.success) {
-  //       return {
-  //         success: false,
-  //         error: payload.message
-  //       }
-  //     }
-  //
-  //     return {
-  //       success: true,
-  //       message: "Validate response success"
-  //     }
-  //   }
-  // })
-  // console.log(validated)
-  // if (!validated.success) {
-  //   return validated
-  // }
-  //
-  // const extracted = await extractPayload<ResponseAuth>(response, {})
-  // console.log(extracted)
-  // if (!extracted.success) {
-  //   return extracted
-  // }
-  //
-  // const { payload } = extracted
-
+  
   if (!payload.success && payload.errors) {
     return {
       success: false,

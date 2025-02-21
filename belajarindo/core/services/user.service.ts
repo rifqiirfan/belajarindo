@@ -49,7 +49,7 @@ export async function createUser<T>({ data }: { data: T }): Promise<ActionRespon
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -61,7 +61,7 @@ export async function updateUser<T>({ data }: { data: T }): Promise<ActionRespon
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -73,7 +73,7 @@ export async function deleteUser({ id }: { id: string }): Promise<ActionResponse
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData());
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload
 }

@@ -44,9 +44,7 @@ export function NavUser() {
     queryKey: ["user", "profiles"],
     queryFn: getUserData
   })
-
-  console.log({ data })
-
+  
   return (
     <SidebarMenu>
       <SidebarMenuItem>

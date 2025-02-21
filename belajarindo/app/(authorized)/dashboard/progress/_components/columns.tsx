@@ -5,19 +5,21 @@ import { deleteAchievement } from "@/core/services/achievement.service";
 import { generateSortableColumn } from "@/components/composite/datatable/sorting";
 import { SimpleAction } from "@/components/composite/datatable/misc";
 import { AchievementsDataTypes } from "@/core/models/achievement.model";
+import { Progress } from "@/components/ui/progress";
 
 const columnHelper = createColumnHelper<any>()
 
 export const columns: ColumnDef<any>[] = [
-  columnHelper.accessor('course', {
+  columnHelper.accessor('course_name', {
     cell: info => info.getValue(),
     header: () => 'Course',
   }),
   columnHelper.accessor('level', {
-    cell: info => info.getValue(),
+    cell: info => <span className="uppercase">{info.getValue() ? String(info.getValue()) : '-'}</span>,
+
     header: () => 'Level',
   }),
-  columnHelper.accessor('lesson', {
+  columnHelper.accessor('lesson_name', {
     cell: info => info.getValue(),
     header: () => 'Lesson',
   }),
@@ -26,7 +28,7 @@ export const columns: ColumnDef<any>[] = [
     header: () => 'Date Enrolled',
   }),
   columnHelper.accessor('progress', {
-    cell: info => info.getValue(),
+    cell: info => <Progress value={info.getValue() ? Number(info.renderValue()) : 0} />,
     header: () => 'Progress',
   }),
 ]

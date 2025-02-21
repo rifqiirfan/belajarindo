@@ -49,7 +49,7 @@ export async function createProgressUser<T>({ data }: { data: T }): Promise<Acti
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -61,7 +61,7 @@ export async function updateProgressUser<T>({ data }: { data: T }): Promise<Acti
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -73,7 +73,7 @@ export async function deleteProgressUser({ id }: { id: string }): Promise<Action
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData());
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload
 }

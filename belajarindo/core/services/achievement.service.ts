@@ -49,7 +49,7 @@ export async function createAchievement<T>({ data }: { data: T }): Promise<Actio
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -61,7 +61,7 @@ export async function updateAchievement<T>({ data }: { data: T }): Promise<Actio
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -73,7 +73,7 @@ export async function deleteAchievement({ id }: { id: string }): Promise<ActionR
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData());
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload
 }

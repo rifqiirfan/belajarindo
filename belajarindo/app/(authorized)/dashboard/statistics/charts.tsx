@@ -20,8 +20,8 @@ export default function ChartStatistics({ config, data }: { config: ChartConfig,
   return (<>
     <Card>
       <CardHeader>
-        <CardTitle>Points collected</CardTitle>
-        <CardDescription>January - June 2025</CardDescription>
+        <CardTitle className="text-xl">Points Collected</CardTitle>
+        <CardDescription className="text-sm">January - Desember</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={config}>
@@ -41,20 +41,20 @@ export default function ChartStatistics({ config, data }: { config: ChartConfig,
               tickFormatter={(value) => value.slice(0, 3)}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
+            <Bar dataKey="point" fill="var(--color-desktop)" radius={8}>
               <LabelList position="top" offset={12} className="fill-foreground" fontSize={12} />
             </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="leading-none text-muted-foreground">Showing points collected by the user for the last 6 months</div>
+        <div className="leading-none text-muted-foreground">Showing points collected by the user for the last 12 months</div>
       </CardFooter>
     </Card>
     <Card>
       <CardHeader>
-        <CardTitle>Achievement received</CardTitle>
-        <CardDescription>January - June 2025</CardDescription>
+        <CardTitle className="text-xl">Achievement Received</CardTitle>
+        <CardDescription className="text-md">January - Desember</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={config}>
@@ -81,7 +81,7 @@ export default function ChartStatistics({ config, data }: { config: ChartConfig,
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="leading-none text-muted-foreground">Showing achievement received by the user for the last 6 months</div>
+        <div className="leading-none text-muted-foreground">Showing achievement received by the user for the last 12 months</div>
       </CardFooter>
     </Card>
   </>)

@@ -106,24 +106,6 @@ function transformStringFieldsOld(input: string, search: string): ColumnFiltersO
 	}));
 }
 
-// export function sParamDatatable(options?: { page?: number, page_size?: number, fields?: string, filter: ColumnFiltersOld }) {
-// 	const obj = {
-// 		page: (options?.page ?? 1), //.toString(),
-// 		page_size: (options?.page_size ?? 100), // (100).toString(),
-// 		sort: JSON.stringify(transformSortingOld([])),
-// 		filter: JSON.stringify(transformFiltersOld([
-// 			...(options?.filter ?? []),
-// 		])),
-// 		...(options?.fields && { fields: options?.fields }),
-// 	}
-
-// 	const queryParams = Object.entries(obj)
-// 		.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-// 		.join('&');
-
-// 	return queryParams;
-// }
-
 export function sParamComboboxGeneral(search: string, fields: string = 'id,name', options?: { filter: ColumnFiltersOld }) {
 	const obj = {
 		page: (1).toString(),

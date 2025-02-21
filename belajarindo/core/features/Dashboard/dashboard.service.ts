@@ -9,7 +9,7 @@ import { getOnErrorDataResponse, getOnErrorDatatableResponse, getOnSuccessDataRe
 const urls = `${BASE_URL()}`;
 const TAGS = 'dashboard';
 
-export async function getStatisticDashboard({ query }: { query?: URLSearchParams | string }): Promise<ActionResponse<ActionGetListData<any>>> {
+export async function getStatisticDashboard({ query }: { query?: URLSearchParams | string }): Promise<any> {
   const r = nextRequestChain(`${urls}/v1/statistic-dashboard?${query?.toString()}`, {
     next: {
       tags: [TAGS, 'statistic'],
@@ -18,11 +18,24 @@ export async function getStatisticDashboard({ query }: { query?: URLSearchParams
 
   const payload = await transformResponse<GetData<any>>(r.getWithFetch(), r.getRequestAndData())
 
-  console.log({payload})
-
   if (!payload.success) {
     return getOnErrorDatatableResponse({error: payload.error})
   }
 
-  return getOnSuccessDatatableResponse({message: payload.message, data: payload.data?.rows, rowCount: payload.data?.count})
+  return {message: payload.message, data: payload}
+}
+
+export async function getMyProgress({ query }: { query?: URLSearchParams | string }): Promise<any> {
+  const r = nextRequestChain(`${urls}/v1/my-progress?${query?.toString()}`, {
+    next: {
+      tags: [TAGS, 'progress'],
+    }
+  }).withAuth({ cache: false })
+
+  const payload = await transformResponse<GetData<any>>(r.getWithFetch(), r.getRequestAndData())
+  if (!payload.success) {
+    return getOnErrorDatatableResponse({error: payload.error})
+  }
+
+  return {success: true, message: payload.message, data: payload?.data}
 }
