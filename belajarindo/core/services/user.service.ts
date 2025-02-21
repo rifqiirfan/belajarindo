@@ -39,7 +39,7 @@ export async function getUserById({ id, query }: { id: string, query?: URLSearch
     return getOnErrorDataResponse({error: payload.error})
   }
 
-  return getOnSuccessDataResponse({message: payload.message, data: payload.data?.rows[0]})
+  return getOnSuccessDataResponse({message: payload.message, data: {...(payload.data?.rows[0] ?? {}), password: ""}})
 }
 
 export async function createUser<T>({ data }: { data: T }): Promise<ActionResponse> {
@@ -49,7 +49,8 @@ export async function createUser<T>({ data }: { data: T }): Promise<ActionRespon
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  console.log(payload)
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -61,7 +62,7 @@ export async function updateUser<T>({ data }: { data: T }): Promise<ActionRespon
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -73,7 +74,7 @@ export async function deleteUser({ id }: { id: string }): Promise<ActionResponse
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData());
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload
 }

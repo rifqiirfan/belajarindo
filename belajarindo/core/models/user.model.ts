@@ -1,9 +1,9 @@
-import { zFallbackString, zFieldText, zFallbackUuid, zFallbackDate } from "@/core/utilities/zodUtils"
+import {zFallbackString, zFieldText, zFallbackUuid, zFallbackDate, zFieldNumber} from "@/core/utilities/zodUtils"
 import { z } from "zod"
 import { baseModel } from "./base_model";
 
 const zUsersSchemaDefault = z.object({
-  id: z.number(),
+  id: z.coerce.number(),
   email: zFallbackString(),
   username: zFallbackString(),
   password: zFallbackString(),
@@ -11,8 +11,8 @@ const zUsersSchemaDefault = z.object({
   country: zFallbackString(),
   date_of_birth: zFallbackDate(),
   join_date: zFallbackString(),
-  level: zFallbackString(),
-  experience_points: zFallbackString(),
+  level: z.coerce.number().optional().transform((v) => v || "-"),
+  experience_points: z.coerce.number().optional().transform((v) => v || "-"),
   role: zFallbackString(),
 }).merge(baseModel);
 
@@ -25,8 +25,16 @@ export const zUsersWithRelation = zUsersSchemaDefault.extend({
 export type UsersRelationDataTypes = z.infer<typeof zUsersWithRelation>;
 
 const zFormUsersRules = z.object({
-  name: zFieldText('name'),
-  description: zFieldText('description'),
+  email: zFieldText('email', true),
+  username: zFieldText('username', true),
+  password: zFieldText('password', true),
+  full_name: zFieldText('full_name', true),
+  country: zFieldText('country', true),
+  date_of_birth: zFallbackDate(),
+  join_date: zFallbackDate(),
+  // level: zFieldNumber('level'),
+  experience_points: zFieldNumber('experience_points'),
+  role: zFieldText('role', true),
 });
 
 export const zUsers = {
