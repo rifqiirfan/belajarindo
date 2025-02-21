@@ -26,10 +26,15 @@ export default async function UsersDatatable({ searchParams }: Omit<PageProps, "
 
   const { data, rowCount } = res
 
-  const { data: parsedData = [] } = zUsers.LIST.safeParse(data)
+  console.log(data)
+
+  const { data: parsedData = [], error } = zUsers.LIST.safeParse(data)
 
   return (
     <>
+      <pre>
+        {JSON.stringify(error, null, 2)}
+      </pre>
       <ServerResponseHandler
         success={res.success}
         message={res.success ? res?.message : ""}

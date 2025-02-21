@@ -39,7 +39,7 @@ export async function getUserById({ id, query }: { id: string, query?: URLSearch
     return getOnErrorDataResponse({error: payload.error})
   }
 
-  return getOnSuccessDataResponse({message: payload.message, data: payload.data?.rows[0]})
+  return getOnSuccessDataResponse({message: payload.message, data: {...(payload.data?.rows[0] ?? {}), password: ""}})
 }
 
 export async function createUser<T>({ data }: { data: T }): Promise<ActionResponse> {

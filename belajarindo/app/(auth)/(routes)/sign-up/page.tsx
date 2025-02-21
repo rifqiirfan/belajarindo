@@ -110,7 +110,7 @@ export default function SignUp() {
       const newData = {
         ...formData,
         full_name: formData.fullName,
-        dob: formData.dateOfBirth
+        date_of_birth: formData.dateOfBirth
       }
       const res = await signup({data: newData})
       if (!res?.success && res.error) {
