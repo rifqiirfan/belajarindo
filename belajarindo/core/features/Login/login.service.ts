@@ -1,11 +1,11 @@
 "use server"
 
-import { ActionResponse, GetResponse } from "@/core/types/response"
-import { storeToken } from "@/core/utilities/authUtils"
-import { BASE_URL } from "@/core/utilities/envUtils";
-import { extractPayload, processResponse, validateResponse } from "@/core/utilities/fetchUtils"
-import { redirect } from "next/navigation";
-import { NextRequest } from "next/server";
+import {ActionResponse, GetResponse} from "@/core/types/response"
+import {storeToken} from "@/core/utilities/authUtils"
+import {BASE_URL} from "@/core/utilities/envUtils";
+import {processResponse} from "@/core/utilities/fetchUtils"
+import {redirect} from "next/navigation";
+import {NextRequest} from "next/server";
 
 const LOGIN_URL = `${BASE_URL()}/login`
 
@@ -24,15 +24,13 @@ export const login = async (formData: { username: string, password: string }): P
   })
 
   const processed = await processResponse(fetch(r), {})
-  console.log(processed)
   if (!processed.success) {
     return processed
   }
 
-  const { response } = processed
+  const {response} = processed
 
   const payload = await response.json()
-
   if (!payload.success) {
     return {
       success: false,
@@ -46,36 +44,6 @@ export const login = async (formData: { username: string, password: string }): P
       error: payload.message
     }
   }
-
-
-  // const validated = await validateResponse(response, {
-  //   extend: async (res) => {
-  //     const payload: {success: boolean, message: string} = await res.json()
-  //     if (!payload.success) {
-  //       return {
-  //         success: false,
-  //         error: payload.message
-  //       }
-  //     }
-  //
-  //     return {
-  //       success: true,
-  //       message: "Validate response success"
-  //     }
-  //   }
-  // })
-  // console.log(validated)
-  // if (!validated.success) {
-  //   return validated
-  // }
-  //
-  // const extracted = await extractPayload<ResponseAuth>(response, {})
-  // console.log(extracted)
-  // if (!extracted.success) {
-  //   return extracted
-  // }
-  //
-  // const { payload } = extracted
 
   if (!payload.success && payload.errors) {
     return {
@@ -85,46 +53,19 @@ export const login = async (formData: { username: string, password: string }): P
   }
 
   await storeToken(payload.token ?? "");
-  redirect("/")
+
+  /* Redirect after login */
+  redirect("/dashboard/achievement")
 }
 
 export const loginGoogle = async (code: string) => {
-
-  // const res: any = await fetch('https://oauth2.googleapis.com/token', {
-  //   method: "POST",
-  //   body: JSON.stringify({
-  //     code: code,
-  //     redirect_uri: 'postmessage',
-  //     grant_type: 'authorization_code',
-  //   })
-  // }
-  // ).then(r => r.json())
-  //
-  // const accessToken = res?.access_token;
-  // const userInfo: any = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-  //   method: "GET",
-  //   headers: {
-  //     Authorization: "Bearer " + accessToken,
-  //     "Content-Type": "application/json"
-  //   }
-  // }
-  // ).then(r => r.json())
-
-  /**
-   * result was 
-   * userInfo = .name, .email,
-   */
-
-
-  // hit the data given to backend, make sure if the backend has email, then apply bearer in here
-  // if the data is not exist in back-end, then regist and accept the bearer
   const r = new NextRequest(`${BASE_URL()}/exchange-code`, {
     method: "POST",
     headers: {
       "Access-Control-Allow-Origin": '*',
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ code: code }),
+    body: JSON.stringify({code: code}),
   })
 
   const processed = await processResponse(fetch(r), {})
@@ -133,7 +74,7 @@ export const loginGoogle = async (code: string) => {
     return processed
   }
 
-  const { response } = processed
+  const {response} = processed
 
   const payload = await response.json()
 
@@ -152,5 +93,5 @@ export const loginGoogle = async (code: string) => {
   }
 
   await storeToken(payload.token ?? "");
-  redirect("/")
+  redirect("/dashboard/achievement")
 }

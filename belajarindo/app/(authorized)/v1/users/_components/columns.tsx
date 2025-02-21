@@ -7,12 +7,11 @@ import { SimpleAction } from "@/components/composite/datatable/misc";
 import { UsersDataTypes } from "@/core/models/user.model";
 
 export const columns: ColumnDef<UsersDataTypes>[] = [
+  generateSortableColumn("full_name"),
   generateSortableColumn("username"),
   generateSortableColumn("role"),
   generateSortableColumn("email"),
   generateSortableColumn("join_date"),
-  generateSortableColumn("level"),
-  generateSortableColumn("experience_point"),
   {
     id: "action",
     header: "Action",

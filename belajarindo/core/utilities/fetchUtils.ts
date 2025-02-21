@@ -1,10 +1,10 @@
-import { cookies } from "next/headers";
+import { cookies, UnsafeUnwrappedCookies } from "next/headers";
 import { ActionResponse, GetResponse } from "@/core/types/response";
 import { NextRequest } from "next/server";
-
-// const cookieStore = await cookies();
+import { headers } from 'next/headers'
 
 export const nextRequestChain = (...args: ConstructorParameters<typeof NextRequest>) => {
+  const cookieStore = cookies() as unknown as UnsafeUnwrappedCookies
   const [input, init = {}] = args
   
   let initRequest: any = {
@@ -12,7 +12,6 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
     headers: {
       "Access-Control-Allow-Origin": '*',
       "Content-Type": "application/json",
-      // "Authorization": `Bearer ${Nex.get("session")?.value}`,
       ...(init.headers || {}),
     },
   }
@@ -24,7 +23,11 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
     getRequestAndData: function () {
       return { request: this.get(), body: String(init?.body || '') };
     },
-    getWithFetch: function () {
+    getWithFetch: async function () {
+      const authorization = (await headers()).get('authorization');
+      const newHeaders = { ...initRequest.headers, "Authorization": authorization };
+
+      initRequest = { ...initRequest, headers: newHeaders };
       return fetch(input, { ...initRequest })
     },
   }
@@ -102,6 +105,8 @@ export async function extractPayload<T>(response: Response, options: {}): Promis
 }
 
 export async function transformResponse<T>(promise: Promise<Response>, options?: { request: NextRequest, body?: string }): Promise<ActionResponse<{ data: T }, {}>> {
+  
+
   const processed = await processResponse(promise, {})
   if (!processed.success) {
     return processed
