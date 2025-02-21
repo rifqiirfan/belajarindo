@@ -11,9 +11,8 @@ export const metadata = {
 
 export default function Page({ searchParams }: PageProps) {
   return (
-    <ProtectDefault role="org:admin,org:user">
-      {/* <Large>Achievements</Large> */}
-
+    <ProtectDefault role="org:user,org:admin">
+      {/* <Large>My Progress</Large> */}
       <Suspense fallback={<SkeletonDatatable />}>
         <MyProgressDatatable searchParams={searchParams} />
       </Suspense>

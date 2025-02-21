@@ -58,12 +58,12 @@ export function BasicDataTable({className}: { className?: string }) {
     return (
         <div className={cn("rounded-md border", className)}>
             <Table>
-                <TableHeader className="bg-white">
+                <TableHeader className="">
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
                                 return (
-                                    <TableHead className="text-secondary-foreground pl-4" key={header.id}>
+                                    <TableHead className="text-secondary-foreground p-4" key={header.id}>
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
@@ -84,7 +84,7 @@ export function BasicDataTable({className}: { className?: string }) {
                                 data-state={row.getIsSelected() && "selected"}
                             >
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell className="pl-3" key={cell.id}>
+                                    <TableCell className="p-4" key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>
                                 ))}

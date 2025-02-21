@@ -81,7 +81,7 @@ export async function createQuiz<T>({ data }: { data: T }): Promise<ActionRespon
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -93,7 +93,7 @@ export async function updateQuiz<T>({ data }: { data: T }): Promise<ActionRespon
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload;
 }
@@ -105,7 +105,7 @@ export async function deleteQuiz({ id }: { id: string }): Promise<ActionResponse
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData());
-  revalidateTag("v1/asset/categories");
+  revalidateTag(TAGS);
 
   return payload
 }

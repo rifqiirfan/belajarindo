@@ -12,6 +12,7 @@ import { transformQueryOld } from "@/core/utilities/datatableUtils";
 import { zAchievements } from "@/core/models/achievement.model";
 import { getAchievements } from "@/core/services/achievement.service";
 import DatatableOnlyTemplate from "@/components/strict/datatable/template/only";
+import { getMyProgress } from "@/core/features/Dashboard/dashboard.service";
 
 const PICK_FILTER: any = () => {
   return { name: true }
@@ -19,10 +20,9 @@ const PICK_FILTER: any = () => {
 
 export default async function MyProgressDatatable({ searchParams }: Omit<PageProps, "params">) {
   const q = await searchParams;
-  const res = await getAchievements({})
+  const res = await getMyProgress({})
 
   const { data, rowCount } = res
-
   return (
     <>
       <ServerResponseHandler

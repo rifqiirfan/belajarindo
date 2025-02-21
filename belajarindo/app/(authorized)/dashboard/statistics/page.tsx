@@ -18,12 +18,12 @@ import { getStatisticDashboard } from "@/core/features/Dashboard/dashboard.servi
 import ChartStatistics from "./charts";
 
 const chartData = [
-  { month: "January", desktop: 0, achievement: 0 },
-  { month: "February", desktop: 100, achievement: 0 },
-  { month: "March", desktop: 0, achievement: 0 },
-  { month: "April", desktop: 0, achievement: 0 },
-  { month: "May", desktop: 0, achievement: 0 },
-  { month: "June", desktop: 0, achievement: 0 },
+  { month: "January", point: 0, achievement: 0 },
+  { month: "February", point: 100, achievement: 0 },
+  { month: "March", point: 0, achievement: 0 },
+  { month: "April", point: 0, achievement: 0 },
+  { month: "May", point: 0, achievement: 0 },
+  { month: "June", point: 0, achievement: 0 },
 ]
 
 const chartConfig = {
@@ -39,8 +39,7 @@ const chartConfig = {
 
 export default async function Page() {
   const res = await getStatisticDashboard({})
-  // const { data, rowCount } = res
-  console.log({res})
+  const { data } = res
 
   return (
     <div className="flex flex-1 flex-col gap-8 p-8">
@@ -92,7 +91,7 @@ export default async function Page() {
         </Card>
       </div> */}
       <div className="grid gap-4">
-        <ChartStatistics config={chartConfig} data={chartData} />
+        <ChartStatistics config={chartConfig} data={data?.data} />
       </div>
     </div>
 

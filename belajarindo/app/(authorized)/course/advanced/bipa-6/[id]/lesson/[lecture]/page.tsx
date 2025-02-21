@@ -1,9 +1,10 @@
 import Image from 'next/image';
 
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import QuizLesson from './quiz';
 import { getQuizzesOneByLesson } from '@/core/services/quiz.service';
 import { getLessonById } from '@/core/services/lesson.service';
+import QuizLesson from '@/app/(authorized)/course/_components/quiz-container';
+import { InformationFinish } from '@/app/(authorized)/course/_components/alert-lessons';
 
 export const metadata = {
   title: 'BIPA 6-7 Course Lessons | Belajar Indo',
@@ -11,11 +12,13 @@ export const metadata = {
 
 export default async function Page({ params }: { params: { id: string, lecture: string } }) {
   const { id, lecture } = await params
-  const [lesson, quiz] = await Promise.all([getLessonById({id}), getQuizzesOneByLesson({ lesson_id: lecture }) as any])
+  const [lesson, quiz] = await Promise.all([getLessonById({id: lecture}) as any, getQuizzesOneByLesson({ lesson_id: lecture }) as any])
 
   const { data } = lesson;
   return (
     <div className="flex flex-1 flex-col gap-8 p-12">
+      {lesson?.data?.status == 'FNS' && <InformationFinish /> }
+
       <div className="grid auto-rows-min gap-8 md:grid-cols-1">
         <h1 className="text-4xl font-bold">Introduction</h1>
         <p className="text-muted-foreground font-medium">This lesson will help you to introduce yourself to Indonesian people.</p>
@@ -64,7 +67,7 @@ export default async function Page({ params }: { params: { id: string, lecture: 
         <p>Most Indonesians prefer to say &quot;<em>Selamat siang</em>&quot; from 10 a.m. to 2 p.m., while &quot;<em>Selamat sore</em>&quot; is from 3 p.m. until sunset. After sunset, we can use &quot;<em>Selamat malam</em>&quot; until midnight.</p>
       </div>
 
-      <QuizLesson type={'bipa_6'} course_id={id} quizzes={quiz?.data} />
+      <QuizLesson type={'bipa_6'} course_id={id} lesson={lesson?.data} quizzes={quiz?.data} />
     </div>
   )
 }

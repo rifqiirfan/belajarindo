@@ -8,7 +8,7 @@ import QuizzesList from '@/app/(authorized)/course/_components/quiz-list';
 import Link from 'next/link';
 import { IPassedBipa, LabelEnum, replaceUnderscore } from '@/app/(authorized)/course/_components/types';
 
-export default function QuizLesson({ type, course_id, quizzes }: { type: IPassedBipa, course_id: string, quizzes: QuizzesRelationDataTypes[] }) {
+export default function QuizLesson({ type, course_id, lesson, quizzes }: { type: IPassedBipa, course_id: string, lesson: any, quizzes: QuizzesRelationDataTypes[] }) {
   const label = LabelEnum[type] ?? ''
   const [open, setOpen] = useState(false)
 
@@ -23,7 +23,7 @@ export default function QuizLesson({ type, course_id, quizzes }: { type: IPassed
         </Button>
       </div>
       <CsxModalBase open={open} setOpen={setOpen} title={'Quiz'} className="flex flex-1 flex-col min-w-[768px]">
-        <QuizzesList questions={quizzes} />
+        <QuizzesList lesson={lesson} questions={quizzes} />
       </CsxModalBase>
     </>
   )

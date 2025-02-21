@@ -9,6 +9,9 @@ import { Progress } from "@/components/ui/progress"
 import { Check, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { QuizzesDataTypes } from "@/core/models/quiz.model"
+import { updateProgressUser } from "@/core/services/user-progress.service"
+import { useLoading } from "@/components/providers/fullscreen-loading"
+import { toast } from "sonner"
 
 const exampleQuestions: QuizzesDataTypes[] = [
   {
@@ -27,10 +30,11 @@ const exampleQuestions: QuizzesDataTypes[] = [
 ]
 
 interface QuizListProps {
+  lesson: any,
   questions: QuizzesDataTypes[]
 }
 
-export default function QuizzesList({ questions }: QuizListProps) {
+export default function QuizzesList({ lesson, questions }: QuizListProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string>("")
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -39,6 +43,8 @@ export default function QuizzesList({ questions }: QuizListProps) {
 
   const currentQuestion = questions[currentQuestionIndex]
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100
+
+  const [, setLoading] = useLoading()
 
   const handleSubmit = () => {
     const isCorrect = selectedAnswer === currentQuestion.correct_answer
@@ -63,6 +69,32 @@ export default function QuizzesList({ questions }: QuizListProps) {
     setAnswers([])
   }
 
+  const handleFinish = async () => {
+    if (lesson?.status == 'NST' || lesson?.status == 'INP') {
+      try {
+        setLoading(true);
+        const res = await updateProgressUser({
+          data: {
+            id: lesson?.progress_id,
+            lesson_id: lesson?.id,
+            quiz_id: questions[0].id
+          }
+        })
+        if (!res.success) {
+          toast.error(`Submit Quiz Failed. ${res.error}`)
+          return
+        }
+        toast.success(`Submit Quiz Success. Lesson Finish.`)
+      }
+      catch (e: any) {
+        toast.error(`Submit Quiz Failed. ${e?.message}`)
+      }
+      finally {
+        setLoading(false);
+      }
+    }
+  }
+
   if (questions?.length == 0) {
     return <Card className="max-w-2xl mx-auto">
       <CardHeader>
@@ -70,11 +102,12 @@ export default function QuizzesList({ questions }: QuizListProps) {
       </CardHeader>
       <CardContent>
         <p className="text-md">
-          We currently work agains this. Please wait a moment and try it again.
+          We currently work again this. Please wait a moment and try it again.
         </p>
       </CardContent>
-    </Card >
+    </Card>
   }
+
   if (currentQuestionIndex >= questions.length) {
     return (
       <Card className="max-w-2xl mx-auto">
@@ -90,9 +123,14 @@ export default function QuizzesList({ questions }: QuizListProps) {
           </div>
         </CardContent>
         <CardFooter>
-          <Button onClick={handleReset} className="w-full">
-            Restart Quiz
-          </Button>
+          {(score == questions.length) &&
+            <Button onClick={lesson?.status != 'FNS' ? handleFinish : handleReset} className="w-full" variant={lesson?.status != 'FNS' ? 'default' : 'outline'}>
+              {lesson?.status != 'FNS' ? 'Finish Lesson' : 'Restart Quiz'}
+            </Button>
+          }
+          {(score != questions.length) &&
+            <Button onClick={handleReset} variant={'outline'} className="w-full">Restart Quiz</Button>
+          }
         </CardFooter>
       </Card>
     )
@@ -106,10 +144,10 @@ export default function QuizzesList({ questions }: QuizListProps) {
           <span>
             Question {currentQuestionIndex + 1} of {questions.length}
           </span>
-          <span>Score: {score}</span>
+          {/* <span>Score: {score}</span> */}
         </div>
         <h2 className="text-2xl font-bold">{currentQuestion.question_text}</h2>
-        <p className="text-sm text-muted-foreground">Lesson ID: {currentQuestion.lesson_id}</p>
+        {/* <p className="text-sm text-muted-foreground">Lesson ID: {currentQuestion.lesson_id}</p> */}
       </div>
       <div className="grid my-4">
         <RadioGroup

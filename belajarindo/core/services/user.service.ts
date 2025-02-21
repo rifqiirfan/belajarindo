@@ -49,7 +49,6 @@ export async function createUser<T>({ data }: { data: T }): Promise<ActionRespon
   }).withAuth()
 
   const payload = await transformResponse(r.getWithFetch(), r.getRequestAndData())
-  console.log(payload)
   revalidateTag(TAGS);
 
   return payload;
