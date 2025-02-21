@@ -55,7 +55,7 @@ export const login = async (formData: { username: string, password: string }): P
   await storeToken(payload.token ?? "");
 
   /* Redirect after login */
-  redirect("/")
+  redirect("/dashboard/achievement")
 }
 
 export const loginGoogle = async (code: string) => {
