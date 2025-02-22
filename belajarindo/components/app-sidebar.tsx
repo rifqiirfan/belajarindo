@@ -11,15 +11,17 @@ import {
   UserCog,
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavUser } from "@/components/nav-user"
+import {NavMain} from "@/components/nav-main"
+import {NavUser} from "@/components/nav-user"
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import { getToken, validateToken } from "@/core/utilities/authUtils"
+import {getToken, validateToken} from "@/core/utilities/authUtils"
+import {useQuery} from "@tanstack/react-query";
+import {Skeleton} from "@/components/ui/skeleton";
 
 /* Menus */
 const data = {
@@ -107,22 +109,57 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+const getUserData = async () => {
+  try {
+    const payload = await validateToken(await getToken())
+    console.log(payload)
+    return {
+      id: payload.userId,
+      name: payload.full_name,
+      username: payload.username,
+      email: payload.email,
+      role: payload.role
+    }
+  } catch (e: any) {
+    console.info(e)
+    return {}
+  }
+}
+
+export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
+  const {data: userData, isPending} = useQuery({
+    queryKey: ["user", "profiles"],
+    queryFn: getUserData
+  })
 
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="bg-white">
-        <NavUser />
+        <NavUser/>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain label="Course" items={data.navMain} />
-        <NavMain label="Admin" items={data.admin} />
-        <NavMain label="Users" items={data.profile} />
+        {!isPending ?
+          <>
+
+            <NavMain label="Course" items={data.navMain}/>
+            {userData?.role === "ADMIN" && <NavMain label="Admin" items={data.admin}/>}
+            <NavMain label="Users" items={data.profile}/>
+          </>
+          :
+          <div className={"p-2 space-y-1"}>
+            <Skeleton className={"w-full h-8 rounded-sm"}/>
+            <Skeleton className={"w-full h-8 rounded-sm"}/>
+            <Skeleton className={"w-full h-8 rounded-sm"}/>
+            <Skeleton className={"w-full h-8 rounded-sm"}/>
+            <Skeleton className={"w-full h-8 rounded-sm"}/>
+            <Skeleton className={"w-full h-8 rounded-sm"}/>
+          </div>
+        }
 
         {/* <NavAdmin admin={data.admin} />
         <NavProfile profile={data.profile} /> */}
       </SidebarContent>
-      <SidebarRail />
+      <SidebarRail/>
     </Sidebar>
   )
 }
