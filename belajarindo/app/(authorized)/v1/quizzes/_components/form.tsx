@@ -31,11 +31,11 @@ export default function FormQuizzes({ data, type }: FormPageProps) {
     ...(data ? { defaultValues: data } : {})
   })
 
-  const onSubmit = async (data: QuizzesDataTypes) => {
+  const onSubmit = async (formData: QuizzesDataTypes) => {
     try {
       setLoading(true)
       if (type === "create") {
-        const res = await createQuiz({ data })
+        const res = await createQuiz({ data: formData })
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
@@ -44,10 +44,10 @@ export default function FormQuizzes({ data, type }: FormPageProps) {
       }
       if (type === "update") {
         const newData = {
-          id: data.id,
-          data: data
+          ...formData,
+          id: data?.id ?? 0,
         }
-        const res = await updateQuiz(newData)
+        const res = await updateQuiz({data: newData})
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
