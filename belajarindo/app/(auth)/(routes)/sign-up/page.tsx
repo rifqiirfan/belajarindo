@@ -18,7 +18,7 @@ import {
 import PersonalInfoStep from "@/components/personal-info-step"
 import ContactInfoStep from "@/components/contact-info-step"
 import AccountInfoStep from "@/components/account-info-step"
-import {signup} from "@/core/features/SIgnup/signup.service";
+import {redirectSignup, signup} from "@/core/features/SIgnup/signup.service";
 
 const personalInfoSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -117,7 +117,7 @@ export default function SignUp() {
         return
       }
       toast.success("Sign up success.")
-      // Here you would typically send the data to your server
+      await redirectSignup()
     }
   }
 

@@ -20,7 +20,7 @@ export default function FormUsers({data, type}: FormPageProps) {
     resolver: zodResolver(zUsers.FORM),
     ...(data ? {defaultValues: data} : {
       defaultValues: {
-        role: "user",
+        role: "USER",
         join_date: new Date(),
         date_of_birth: new Date(),
         experience_points: 100
@@ -75,8 +75,8 @@ export default function FormUsers({data, type}: FormPageProps) {
               disabled={type === "detail"}
               label="Role"
               options={[
-                {label: 'user', value: 'USER'},
-                {label: 'admin', value: 'ADMIN'},
+                {label: 'USER', value: 'USER'},
+                {label: 'ADMIN', value: 'ADMIN'},
               ]}
             />
             <InputBasic name={"experience_points"} required={true} disabled={type === "detail"}/>

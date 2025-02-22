@@ -1,4 +1,4 @@
-import { zFallbackString, zFieldText, zFallbackNumber } from "@/core/utilities/zodUtils"
+import { zFallbackString, zFieldText, zFallbackNumber, zFieldNumber } from "@/core/utilities/zodUtils"
 import { z } from "zod"
 import { baseModel } from "./base_model";
 
@@ -7,6 +7,7 @@ const zAchievementsSchemaDefault = z.object({
   name: zFallbackString(),
   description: zFallbackString(),
   achieve_point: zFallbackNumber(),
+  difficulty_level: zFallbackString(),
   icon_url: zFallbackString(),
 }).merge(baseModel);
 
@@ -21,7 +22,8 @@ export type AchievementsRelationDataTypes = z.infer<typeof zAchievementsWithRela
 const zFormAchievementsRules = z.object({
   name: zFieldText('name'),
   description: zFieldText('description'),
-  achieve_point: zFieldText('achieve_point'),
+  achieve_point: zFieldNumber('achieve_point'),
+  difficulty_level: zFieldText('difficulty_level'),
   icon_url: zFieldText('icon_url'),
 });
 

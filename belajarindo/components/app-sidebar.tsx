@@ -2,11 +2,15 @@
 
 import * as React from "react"
 import {
+  Book,
   BookOpen,
+  BookOpenCheck,
   ChartLine,
+  ClipboardList,
   FileCog,
   ListTodo,
   Star,
+  Trophy,
   User,
   UserCog,
 } from "lucide-react"
@@ -67,22 +71,22 @@ const data = {
     {
       title: "Course",
       url: "/v1/courses",
-      icon: FileCog,
+      icon: Book,
     },
     {
       title: "Lesson",
       url: "/v1/lessons",
-      icon: FileCog,
+      icon: BookOpenCheck,
     },
     {
       title: "Quiz",
       url: "/v1/quizzes",
-      icon: FileCog,
+      icon: ClipboardList,
     },
     {
       title: "Achievement",
       url: "/v1/achievements",
-      icon: FileCog,
+      icon: Trophy,
     },
   ],
   profile: [
@@ -101,6 +105,13 @@ const data = {
       url: "/dashboard/statistics",
       icon: ChartLine,
     },
+    {
+      title: "Profile",
+      url: "/profile",
+      icon: User,
+    },
+  ],
+  adminProfile: [
     {
       title: "Profile",
       url: "/profile",
@@ -140,10 +151,10 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         {!isPending ?
           <>
-
-            <NavMain label="Course" items={data.navMain}/>
+            {userData?.role === "USER" && <NavMain label="Course" items={data.navMain}/>}
+            {userData?.role === "USER" && <NavMain label="Users" items={data.profile}/>}
             {userData?.role === "ADMIN" && <NavMain label="Admin" items={data.admin}/>}
-            <NavMain label="Users" items={data.profile}/>
+            {userData?.role === "ADMIN" && <NavMain label="Admin" items={data.adminProfile}/>}
           </>
           :
           <div className={"p-2 space-y-1"}>

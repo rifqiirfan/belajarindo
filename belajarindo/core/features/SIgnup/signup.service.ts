@@ -51,6 +51,11 @@ export const signup = async ({data}: {data: Record<string, any>}) => {
     }
   }
 
-  await storeToken(payload.token ?? "");
-  redirect("/")
+  // await storeToken(payload.token ?? "");
+  // redirect("/");
+  return { success: true };
+}
+
+export const redirectSignup = async () => {
+  redirect("/log-in");
 }
