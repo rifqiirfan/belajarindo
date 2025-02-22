@@ -5,14 +5,16 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import {IPassedBipa} from "@/app/(authorized)/course/_components/types";
 
-export const generateMetadata = async ({params}: {params: {type: string, level: string}}) => {
+type PageParams = Promise<{ type: string, level: string, id: string}>
+
+export const generateMetadata = async ({params}: {params: PageParams}) => {
   const { type, level } = await params
   return {
     title: `${type} ${level} Course Lessons | Belajar Indo`,
   }
 }
 
-export default async function Page({ params }: { params: { id: string, level: string, type: string } }) {
+export default async function Page({ params }: { params: PageParams }) {
   const { id, type, level } = await params
   const [course, res] = await Promise.all([getCourseById({ id }) as any, getLessonsByCourse({ course_id: id, query: '' })])
 

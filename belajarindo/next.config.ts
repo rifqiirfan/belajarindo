@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
     // even if your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
   experimental: {
     optimizePackageImports: [
       '@radix-ui',

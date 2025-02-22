@@ -2,8 +2,8 @@ import { z } from "zod";
 import { ColumnFilter, ColumnSort, PaginationState, SortingState, VisibilityState } from "@tanstack/react-table";
 
 export type PageProps = {
-  params: { [key: string]: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: Promise<{ [key: string]: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 const filterDefaultSchema = z.object({

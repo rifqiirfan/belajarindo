@@ -1,3 +1,4 @@
+/*
 "use client"
 
 import {DatatableProvider} from "@/components/composite/datatable";
@@ -16,10 +17,10 @@ import {
   VisibilityState
 } from "@tanstack/react-table";
 import {useQuery} from "@tanstack/react-query";
-import {SkeletonDatatable} from "@/components/fabrication/skeletons/datatable";
-import {ColumnFiltersOld} from "@/types/datatable";
-import {ActionGetListData, ActionResponse} from "@/core/types/response";n
-import {queryFnResponseHandler} from "@/utilities/reactQueryUtils";
+import {SkeletonDatatable} from "@/components/composite/skeletons/datatable";
+import {ColumnFiltersOld} from "@/core/types/datatable";
+import {ActionGetListData, ActionResponse} from "@/core/types/response";
+import {queryFnResponseHandler} from "@/core/utilities/reactQueryUtils";
 
 type PickTableState = Pick<TableState, "pagination" | "rowSelection" | "sorting" | "columnVisibility" | "globalFilter">
 
@@ -148,3 +149,4 @@ export default function DatatableWrapper<T>({
     </DatatableProvider>
   )
 }
+*/

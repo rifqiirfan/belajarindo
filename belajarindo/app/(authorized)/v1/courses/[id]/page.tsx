@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: "Master Data Course Detail",
 };
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = params
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
 
   const res = await getCourseById({ id })
 

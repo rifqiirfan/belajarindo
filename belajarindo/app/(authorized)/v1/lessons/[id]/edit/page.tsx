@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Master Data Lesson Edit",
 };
 
-export default async function Page({params}: { params: { id: string } }) {
+export default async function Page({params}: { params: Promise<{ id: string }> }) {
   const {id} = await params
 
   const res = await getLessonById({id})

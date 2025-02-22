@@ -1,20 +1,19 @@
-import Image from 'next/image';
-
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import QuizLesson from '../../../../../_components/quiz-container';
 import { getQuizzesOneByLesson } from '@/core/services/quiz.service';
 import { getLessonById } from '@/core/services/lesson.service';
 import { InformationFinish } from '@/app/(authorized)/course/_components/alert-lessons';
 import {IPassedBipa} from "@/app/(authorized)/course/_components/types";
 
-export const generateMetadata = async ({params}: {params: {type: string, level: string}}) => {
+type PageParams = Promise<{ type: string, level: string, id: string, lecture: string}>
+
+export const generateMetadata = async ({params}: {params: PageParams}) => {
   const { type, level } = await params
   return {
     title: `${type} ${level} Courses | Belajar Indo`,
   }
 }
 
-export default async function Page({ params }: { params: { id: string, lecture: string, level: string } }) {
+export default async function Page({ params }: { params: PageParams}) {
   const { id, lecture, level } = await params
   const [lesson, quiz] = await Promise.all([getLessonById({id: lecture}) as any, getQuizzesOneByLesson({ lesson_id: lecture }) as any])
 
