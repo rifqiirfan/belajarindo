@@ -146,7 +146,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
             <NavMain label="Users" items={data.profile}/>
           </>
           :
-          <div className={"p-2 space-y-1"}>
+          < div className={"p-2 space-y-1"}>
             <Skeleton className={"w-full h-8 rounded-sm"}/>
             <Skeleton className={"w-full h-8 rounded-sm"}/>
             <Skeleton className={"w-full h-8 rounded-sm"}/>
@@ -157,7 +157,8 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
         }
 
         {/* <NavAdmin admin={data.admin} />
-        <NavProfile profile={data.profile} /> */}
+        <NavProfile profile={data.profile} /> */
+        }
       </SidebarContent>
       <SidebarRail/>
     </Sidebar>
