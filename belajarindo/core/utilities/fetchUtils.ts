@@ -38,8 +38,6 @@ export const nextRequestChain = (...args: ConstructorParameters<typeof NextReque
     },
     withAuth: function (options?: { cache: boolean }) {
       if (!options?.cache) initRequest = { ...initRequest, cache: "no-store" }
-      // const newHeaders = { ...initRequest.headers, "Authorization": `Bearer ${cookieStore.get("session")?.value}` };
-      // initRequest = { ...initRequest, headers: newHeaders };
       return bundle;
     },
   };

@@ -7,11 +7,8 @@ import { getLessonById } from '@/core/services/lesson.service';
 import { InformationFinish } from '@/app/(authorized)/course/_components/alert-lessons';
 import {IPassedBipa} from "@/app/(authorized)/course/_components/types";
 
-// export const metadata = {
-//   title: 'BIPA 1 Course Lessons | Belajar Indo',
-// }
-
-export const generateMetadata = ({params: {type, level}}: {params: {type: string, level: string}}) => {
+export const generateMetadata = async ({params}: {params: {type: string, level: string}}) => {
+  const { type, level } = await params
   return {
     title: `${type} ${level} Courses | Belajar Indo`,
   }
@@ -22,9 +19,9 @@ export default async function Page({ params }: { params: { id: string, lecture: 
   const [lesson, quiz] = await Promise.all([getLessonById({id: lecture}) as any, getQuizzesOneByLesson({ lesson_id: lecture }) as any])
 
   const { data } = lesson;
-  console.log(data)
+
   return (
-    <div className="flex flex-1 flex-col gap-8 p-12">
+    <div className="flex flex-1 flex-col gap-8 p-6">
       {lesson?.data?.status == 'FNS' && <InformationFinish /> }
 
       <div className={"prose max-w-none"} dangerouslySetInnerHTML={{ __html: data?.content ?? '' }} />

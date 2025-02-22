@@ -106,7 +106,6 @@ export default function SignUp() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (validateStep()) {
-      console.log("Form submitted:", formData)
       const newData = {
         ...formData,
         full_name: formData.fullName,

@@ -38,7 +38,7 @@ export default function Dashboard() {
               </Breadcrumb>
             </div>
           </header>
-          <div className="flex flex-1 flex-col gap-8 p-8">
+          <div className="flex flex-1 flex-col gap-8 p-6">
             <div className="grid auto-rows-min gap-8 md:grid-cols-3">
               <Image
                 src="/beginner_bipa-1_card.png"

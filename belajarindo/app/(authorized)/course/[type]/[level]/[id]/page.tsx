@@ -5,11 +5,8 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import {IPassedBipa} from "@/app/(authorized)/course/_components/types";
 
-// export const metadata = {
-//   title: 'BIPA 1 Course Lessons | Belajar Indo',
-// }
-
-export const generateMetadata = ({params: {type, level}}: {params: {type: string, level: string}}) => {
+export const generateMetadata = async ({params}: {params: {type: string, level: string}}) => {
+  const { type, level } = await params
   return {
     title: `${type} ${level} Course Lessons | Belajar Indo`,
   }

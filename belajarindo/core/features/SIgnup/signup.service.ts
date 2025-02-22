@@ -22,7 +22,6 @@ export const signup = async ({data}: {data: Record<string, any>}) => {
   })
 
   const processed = await processResponse(fetch(r), {})
-  console.log(processed)
   if (!processed.success) {
     return processed
   }

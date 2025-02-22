@@ -28,10 +28,6 @@ export function zFallbackString(f: string = "-") {
 	return z.string().nullish().transform((v) => v || f);
 }
 
-export function zFallbackUuid(f: string = "-") {
-	return z.string().nullish().transform((v) => v || f);
-}
-
 export function zFallbackNumber(f: number = 0) {
 	return z.coerce.number().nullable().transform((v) => v || f)
 }
@@ -66,11 +62,6 @@ export const zFieldText = (label: string, isRequired: boolean = false) => {
 export const zFieldNumber = (label: string) => {
 	const { zParamConfig } = zSetupConfig(label)
 	return z.coerce.number({ ...zParamConfig })
-}
-
-export const zFieldBoolean = (label: string) => {
-	const { zParamConfig } = zSetupConfig(label)
-	return z.boolean({ ...zParamConfig });
 }
 
 export const zFieldDate = (label: string) => {

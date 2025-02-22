@@ -25,9 +25,6 @@ export default async function UsersDatatable({ searchParams }: Omit<PageProps, "
   })
 
   const { data, rowCount } = res
-
-  console.log(data)
-
   const { data: parsedData = [], error } = zUsers.LIST.safeParse(data)
 
   return (

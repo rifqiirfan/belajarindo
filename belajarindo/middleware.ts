@@ -16,7 +16,7 @@ export const config = {
 }
 
 export async function middleware(req: NextRequest) {
-  const excludedPaths = ["/not-found"];
+  const excludedPaths = ["/", "/log-in", "/sign-up", "/not-found"];
   const { pathname } = req.nextUrl;
 
   if (excludedPaths.includes(pathname)) {

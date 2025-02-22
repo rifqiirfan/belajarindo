@@ -17,7 +17,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div className="flex flex-1 flex-col gap-8 p-12">
+    <div className="flex flex-1 flex-col gap-8 p-6">
       <div className="grid auto-rows-min gap-8 md:grid-cols-1">
         <h1 className="text-4xl font-bold">Introduction</h1>
         <p className="text-muted-foreground font-medium">This lesson will help you to introduce yourself to Indonesian people.</p>

@@ -1,4 +1,4 @@
-import { zFallbackString, zFieldText, zFallbackUuid, zFieldNumber } from "@/core/utilities/zodUtils"
+import { zFallbackString, zFieldText, zFieldNumber } from "@/core/utilities/zodUtils"
 import { z } from "zod"
 import { baseModel } from "./base_model";
 

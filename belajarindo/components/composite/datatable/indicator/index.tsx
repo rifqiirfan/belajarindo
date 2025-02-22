@@ -45,10 +45,9 @@ const RowPerPage = ({ className }: { className?: string }) => {
 const PageCount = () => {
   const table = useDatatableContext()
   return (
-    // <Small>
-    //   Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
-    // </Small>
-    <></>
+    <span className="text-sm text-muted-foreground">
+      Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+    </span>
   )
 }
 
@@ -60,12 +59,9 @@ const PageEntries = () => {
   const initialRowCount = table.getState().pagination.pageIndex * table.getState().pagination.pageSize
   return (
     <>
-      {/* <Muted>
+      <span className="text-[13px] text-muted-foreground">
         Showing {initialRowCount + 1} to {initialRowCount + table.getPaginationRowModel().rows.length} from {table.getRowCount()} row(s)
-      </Muted> */}
-      {/*<Muted>*/}
-      {/*    Showing {table.getPaginationRowModel().rows.length} of {table.getState().pagination.pageSize} from {table.getRowCount()}*/}
-      {/*</Muted>*/}
+      </span>
     </>
   )
 }

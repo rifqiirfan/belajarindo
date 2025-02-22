@@ -69,7 +69,7 @@ export const loginGoogle = async (code: string) => {
   })
 
   const processed = await processResponse(fetch(r), {})
-  console.log(processed)
+
   if (!processed.success) {
     return processed
   }

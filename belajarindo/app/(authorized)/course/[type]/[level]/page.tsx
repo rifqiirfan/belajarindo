@@ -4,11 +4,8 @@ import {courseSchema, courseTypeSchema} from "@/core/features/Course/course.mode
 import {notFound} from "next/navigation";
 import {IPassedBipa} from "@/app/(authorized)/course/_components/types";
 
-// export const metadata = {
-//   title: 'Beginner BIPA 1 Courses | Belajar Indo',
-// }
-
-export const generateMetadata = ({params: {type, level}}: {params: {type: string, level: string}}) => {
+export const generateMetadata = async ({params}: {params: {type: string, level: string}}) => {
+  const { type, level } = await params
   return {
     title: `${type} ${level} Courses | Belajar Indo`,
   }

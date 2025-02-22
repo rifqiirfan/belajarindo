@@ -58,7 +58,6 @@ export default function FormProfile({data}: Omit<FormPageProps, "type">) {
         join_date: format(data?.join_date, "yyyy-MM-dd", { locale: enUS }),
         date_of_birth: format(data?.date_of_birth, "yyyy-MM-dd", { locale: enUS })
       }
-      console.log(newData)
       const res = await updateUser({data: newData})
       if (!res.success) {
         toast.error(`Update Failed. ${res.error}`)
