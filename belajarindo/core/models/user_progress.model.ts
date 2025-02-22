@@ -20,8 +20,6 @@ export const zProgressUsersWithRelation = zProgressUsersSchemaDefault.extend({
 export type ProgressUsersRelationDataTypes = z.infer<typeof zProgressUsersWithRelation>;
 
 const zFormProgressUsersRules = z.object({
-  name: zFieldText('name'),
-  description: zFieldText('description'),
 
 });
 

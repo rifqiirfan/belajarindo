@@ -35,6 +35,7 @@ export default function FormQuizzes({ data, type }: FormPageProps) {
     try {
       setLoading(true)
       if (type === "create") {
+        formData.question_type = 'Multiple Answer';
         const res = await createQuiz({ data: formData })
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
