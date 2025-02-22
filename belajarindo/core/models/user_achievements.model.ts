@@ -18,8 +18,6 @@ export const zAchievementUsersWithRelation = zAchievementUsersSchemaDefault.exte
 export type AchievementUsersRelationDataTypes = z.infer<typeof zAchievementUsersWithRelation>;
 
 const zFormAchievementUsersRules = z.object({
-  name: zFieldText('name'),
-  description: zFieldText('description'),
 
 });
 
