@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useLoading } from "@/components/providers/fullscreen-loading";
 import { Card, CardContent } from "@/components/ui/card";
 import { FormPageProps } from "@/core/types/pages";
-import { Form } from "@/components/ui/form";
+import {Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -14,6 +14,9 @@ import { getCourses } from "@/core/services/course.service";
 import { sParamComboboxGeneral } from "@/core/utilities/zodUtils";
 import { LessonsDataTypes, zLessons } from "@/core/models/lesson.model";
 import { createLesson, updateLesson } from "@/core/services/lesson.service";
+import {cn, toCapitalizedWords} from "@/lib/utils";
+import {Input} from "@/components/ui/input";
+import Editor from "@/components/strict/rich-text/editor";
 
 export default function FormLessons({ data, type }: FormPageProps) {
   const [, setLoading] = useLoading()
@@ -79,6 +82,18 @@ export default function FormLessons({ data, type }: FormPageProps) {
             />
             <InputBasic name={"title"} required={true} disabled={type === "detail"} />
             <TextareaBasic name={"content"} required={true} disabled={type === "detail"} />
+            <FormField
+              name={"content"}
+              render={({field: {value, onChange}}) => (
+                <FormItem>
+                  <FormLabel className={cn("text-foreground", "required")}>Content</FormLabel>
+                  <FormControl>
+                    <Editor content={value} onChange={onChange} placeholder={"Enter Content"}/>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <InputBasic name={"audio_url"} required={true} disabled={type === "detail"} />
             <InputBasic name={"video_url"} required={true} disabled={type === "detail"} />
             <InputBasic name={"experience_point"} required={true} disabled={type === "detail"} />
