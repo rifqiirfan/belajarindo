@@ -32,7 +32,7 @@ export default function FormUsers({data, type}: FormPageProps) {
     try {
       setLoading(true)
       if (type === "create") {
-        const res = await createUser({data: formData})
+        const res = await createUser({ data: formData })
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
@@ -44,7 +44,6 @@ export default function FormUsers({data, type}: FormPageProps) {
           ...formData,
           id: data?.id.toString()
         }
-        console.log(newData)
         const res = await updateUser({data: newData})
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)

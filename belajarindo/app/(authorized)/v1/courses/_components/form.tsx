@@ -22,12 +22,12 @@ export default function FormLessons({ data, type }: FormPageProps) {
     ...(data ? { defaultValues: data } : {})
   })
 
-  const onSubmit = async (data: CoursesDataTypes) => {
+  const onSubmit = async (formData: CoursesDataTypes) => {
     try {
       setLoading(true)
       if (type === "create") {
-        data.creation_date = new Date().toISOString();
-        const res = await createCourse({ data })
+        // formData.creation_date = new Date().toISOString();
+        const res = await createCourse({ data: formData })
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
@@ -36,10 +36,10 @@ export default function FormLessons({ data, type }: FormPageProps) {
       }
       if (type === "update") {
         const newData = {
-          id: data.id,
-          data: data
+          ...formData,
+          id: data?.id ?? 0,
         }
-        const res = await updateCourse(newData)
+        const res = await updateCourse({data: newData})
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return

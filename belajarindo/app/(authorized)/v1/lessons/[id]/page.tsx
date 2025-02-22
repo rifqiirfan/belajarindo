@@ -1,7 +1,6 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 import FormLessons from "../_components/form";
-import { getAchievementById } from "@/core/services/achievement.service";
+import { getLessonById } from "@/core/services/lesson.service";
 
 export const metadata: Metadata = {
   title: "Detail Lesson",
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 export default async function Page({ params }: { params: { id: string } }) {
   const { id } = params
 
-  const res = await getAchievementById({ id })
+  const res = await getLessonById({ id })
 
   return (
     <>

@@ -60,7 +60,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
     },
   })
 
-  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+  const onSubmit = async (formData: z.infer<typeof loginSchema>) => {
     const res = await login(data)
     if (!res?.success && res?.error) {
       toast.error("Failed to login. " + res.error)

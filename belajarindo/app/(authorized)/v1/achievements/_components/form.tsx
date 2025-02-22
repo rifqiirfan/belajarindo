@@ -31,11 +31,11 @@ export default function FormAchievement({ data, type }: FormPageProps) {
     ...(data ? { defaultValues: data } : {})
   })
 
-  const onSubmit = async (data: AchievementsDataTypes) => {
+  const onSubmit = async (formData: AchievementsDataTypes) => {
     try {
       setLoading(true)
       if (type === "create") {
-        const res = await createAchievement({ data })
+        const res = await createAchievement({ data: formData })
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
@@ -44,10 +44,10 @@ export default function FormAchievement({ data, type }: FormPageProps) {
       }
       if (type === "update") {
         const newData = {
-          id: data.id,
-          data: data
+          ...formData,
+          id: data?.id ?? 0,
         }
-        const res = await updateAchievement(newData)
+        const res = await updateAchievement({data: newData})
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return

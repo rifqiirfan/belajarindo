@@ -26,11 +26,11 @@ export default function FormLessons({ data, type }: FormPageProps) {
     ...(data ? { defaultValues: data } : {})
   })
 
-  const onSubmit = async (data: LessonsDataTypes) => {
+  const onSubmit = async (formData: LessonsDataTypes) => {
     try {
       setLoading(true)
       if (type === "create") {
-        const res = await createLesson({ data })
+        const res = await createLesson({ data: formData })
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
@@ -39,10 +39,10 @@ export default function FormLessons({ data, type }: FormPageProps) {
       }
       if (type === "update") {
         const newData = {
-          id: data.id,
-          data: data
+          ...formData,
+          id: data?.id ?? 0,
         }
-        const res = await updateLesson(newData)
+        const res = await updateLesson({data: newData})
         if (!res.success) {
           toast.error(`${type} Failed. ${res.error}`)
           return
@@ -80,7 +80,7 @@ export default function FormLessons({ data, type }: FormPageProps) {
                 },
               }}
             />
-            <InputBasic name={"title"} required={true} disabled={type === "detail"} />
+            <InputBasic name={"name"} required={true} disabled={type === "detail"} />
             <TextareaBasic name={"content"} required={true} disabled={type === "detail"} />
             <FormField
               name={"content"}
@@ -96,7 +96,6 @@ export default function FormLessons({ data, type }: FormPageProps) {
             />
             <InputBasic name={"audio_url"} required={true} disabled={type === "detail"} />
             <InputBasic name={"video_url"} required={true} disabled={type === "detail"} />
-            <InputBasic name={"experience_point"} required={true} disabled={type === "detail"} />
             <InputBasic name={"lesson_order"} required={true} disabled={type === "detail"} />
 
             <div className="flex gap-2">

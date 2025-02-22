@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
     // even if your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    optimizePackageImports: [
+      '@radix-ui',
+      '@hookform',
+      'lucide-react',
+      '@/components/ui',
+      'sonner',
+      'zod'
+    ]
+  }
 };
 
 export default nextConfig;

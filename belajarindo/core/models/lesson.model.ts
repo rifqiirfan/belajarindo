@@ -1,4 +1,4 @@
-import { zFallbackString, zFieldText, zFallbackUuid } from "@/core/utilities/zodUtils"
+import { zFallbackString, zFieldText, zFallbackUuid, zFieldNumber } from "@/core/utilities/zodUtils"
 import { z } from "zod"
 import { baseModel } from "./base_model";
 
@@ -8,7 +8,6 @@ const zLessonsSchemaDefault = z.object({
   content: zFallbackString(),
   audio_url: zFallbackString(),
   video_url: zFallbackString(),
-  experience_point: zFallbackString(),
   lesson_order: zFallbackString(),
   course_id: z.number(),
 }).merge(baseModel);
@@ -23,8 +22,11 @@ export type LessonsRelationDataTypes = z.infer<typeof zLessonsWithRelation>;
 
 const zFormLessonsRules = z.object({
   name: zFieldText('name'),
-  description: zFieldText('description'),
-
+  content: zFieldText('content'),
+  audio_url: zFieldText('audio_url').optional(),
+  video_url: zFieldText('video_url').optional(),
+  lesson_order: zFieldNumber('lesson_order'),
+  course_id: zFieldNumber('course_id'),
 });
 
 export const zLessons = {
