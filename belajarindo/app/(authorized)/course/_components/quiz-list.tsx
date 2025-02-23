@@ -83,15 +83,14 @@ export default function QuizzesList({ lesson, questions }: QuizListProps) {
             quiz_id: questions[0].id
           }
         }) as any
-        console.log({ res })
         if (!res.success) {
           toast.error(`Submit Quiz Failed. ${res.error}`)
           return
         }
         toast.success(`Submit Quiz Success. Lesson Finish.`)
 
-        if (res?.data?.achievement) {
-
+        if (res?.data?.achievement?.length > 0) {
+          setAchievement(res.data?.achievement)
         }
       }
       catch (e: any) {
@@ -110,16 +109,16 @@ export default function QuizzesList({ lesson, questions }: QuizListProps) {
   if (achievement.length > 0) {
     return (
       <div className="flex-grow overflow-auto p-4">
-        <h4 className="mb-3">Congrats! You Got New Achievement!</h4>
+        <h4 className="text-lg font-medium mb-3">New Achievement</h4>
         {achievement?.map((d: any, index: Key) => (
-          <div key={index} className="flex flex-col items-center space-y-2 p-0">
+          <div key={index} className="flex flex-col items-center space-y-2 p-0 mb-3">
             {d?.icon_url && (
-              <Avatar className="p-2">
+              <Avatar className="p-2 bg-slate-200">
                 <AvatarImage src={d?.icon_url} alt="@shadcn" />
-                <AvatarFallback>TROPY</AvatarFallback>
+                <AvatarFallback className="bg-transparent">TR</AvatarFallback>
               </Avatar>
             )}
-            <span className="text-sm font-medium text-center">{d.achievement_name}</span>
+            <span className="text-sm font-medium text-center">{d.name}</span>
           </div>
         ))}
         <Button onClick={handleBackQuiz} variant={'outline'} className="mt-3 w-full">Back To Quiz</Button>

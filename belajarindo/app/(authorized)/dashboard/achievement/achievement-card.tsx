@@ -27,9 +27,9 @@ export default function AchievementCard({achievement}: {achievement: any}) {
           <span>Achievement</span>
           {achievement.achievement?.map((a: any, index: Key) => (
             <TooltipBasic key={index} message={a?.name ?? 'Undefined'}>
-              <Avatar className="p-2">
+              <Avatar className="p-2 bg-slate-200">
                 <AvatarImage src={a?.icon_url} alt="@shadcn" />
-                <AvatarFallback>TROPY</AvatarFallback>
+                <AvatarFallback className="bg-transparent">TR</AvatarFallback>
               </Avatar>
             </TooltipBasic>
           ))}

@@ -9,7 +9,6 @@ export default async function AchievementPage() {
   const res = await getLessonsDashboard({});
   const { data } = res;
 
-  console.log({data})
   const achievements = [
     {
       name: 'Beginner',
@@ -17,7 +16,7 @@ export default async function AchievementPage() {
       color: 'green',
       total_enrolled: data?.beginner?.enrolled ?? 0,
       progress: data?.beginner?.progress ?? 0,
-      achievement: data?.beginner?.achivement ?? []
+      achievement: data?.beginner?.achievement ?? []
     },
     {
       name: 'Intermediate',
@@ -25,7 +24,7 @@ export default async function AchievementPage() {
       color: 'cyan',
       total_enrolled: data?.intermediate?.enrolled ?? 0,
       progress: data?.intermediate?.progress ?? 0,
-      achievement: data?.intermediate?.achivement ?? []
+      achievement: data?.intermediate?.achievement ?? []
     },
     {
       name: 'Advanced',
@@ -33,7 +32,7 @@ export default async function AchievementPage() {
       color: 'pink',
       total_enrolled: data?.advanced?.enrolled ?? 0,
       progress: data?.advanced?.progress ?? 0,
-      achievement: data?.advanced?.achivement ?? []
+      achievement: data?.advanced?.achievement ?? []
     }
   ]
 
