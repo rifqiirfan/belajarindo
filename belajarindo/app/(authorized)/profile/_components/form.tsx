@@ -76,9 +76,9 @@ export default function FormProfile({data}: Omit<FormPageProps, "type">) {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <InputBasic name={"full_name"} required={true}/>
-            <InputBasic name={"email"} required={true}/>
-            <InputBasic name={"username"} required={true}/>
+            <InputBasic name={"full_name"} required={true} disabled/>
+            <InputBasic name={"email"} required={true} disabled/>
+            <InputBasic name={"username"} required={true} disabled/>
             <InputBasic inputProps={{type: "password"}} name={"password"} required={true}/>
             <InputBasic inputProps={{type: "password"}} name={"confirm_password"} required={true}/>
             <div className="flex gap-2">
