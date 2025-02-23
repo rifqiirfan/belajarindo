@@ -1,6 +1,9 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CircleX } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
+import { TooltipBasic } from "@/components/composite/tooltip";
+import { Key } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function AchievementCard({achievement}: {achievement: any}) {
   return (
@@ -21,8 +24,15 @@ export default function AchievementCard({achievement}: {achievement: any}) {
       </CardContent>
       <CardFooter>
         <div className="flex items-center gap-2">
-          <span>Achievement:</span>
-          <CircleX />
+          <span>Achievement</span>
+          {achievement.achievement?.map((a: any, index: Key) => (
+            <TooltipBasic key={index} message={a?.name ?? 'Undefined'}>
+              <Avatar className="p-2">
+                <AvatarImage src={a?.icon_url} alt="@shadcn" />
+                <AvatarFallback>TROPY</AvatarFallback>
+              </Avatar>
+            </TooltipBasic>
+          ))}
         </div>
       </CardFooter>
     </Card>

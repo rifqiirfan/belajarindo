@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { Key, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -12,6 +12,7 @@ import { QuizzesDataTypes } from "@/core/models/quiz.model"
 import { updateProgressUser } from "@/core/services/user-progress.service"
 import { useLoading } from "@/components/providers/fullscreen-loading"
 import { toast } from "sonner"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const exampleQuestions: QuizzesDataTypes[] = [
   {
@@ -46,6 +47,8 @@ export default function QuizzesList({ lesson, questions }: QuizListProps) {
 
   const [, setLoading] = useLoading()
 
+  const [achievement, setAchievement] = useState<any[]>([]);
+
   const handleSubmit = () => {
     const isCorrect = selectedAnswer === currentQuestion.correct_answer
     setIsSubmitted(true)
@@ -79,12 +82,17 @@ export default function QuizzesList({ lesson, questions }: QuizListProps) {
             lesson_id: lesson?.id,
             quiz_id: questions[0].id
           }
-        })
+        }) as any
+        console.log({ res })
         if (!res.success) {
           toast.error(`Submit Quiz Failed. ${res.error}`)
           return
         }
         toast.success(`Submit Quiz Success. Lesson Finish.`)
+
+        if (res?.data?.achievement) {
+
+        }
       }
       catch (e: any) {
         toast.error(`Submit Quiz Failed. ${e?.message}`)
@@ -93,6 +101,30 @@ export default function QuizzesList({ lesson, questions }: QuizListProps) {
         setLoading(false);
       }
     }
+  }
+
+  const handleBackQuiz = async () => {
+    setAchievement([])
+  }
+
+  if (achievement.length > 0) {
+    return (
+      <div className="flex-grow overflow-auto p-4">
+        <h4 className="mb-3">Congrats! You Got New Achievement!</h4>
+        {achievement?.map((d: any, index: Key) => (
+          <div key={index} className="flex flex-col items-center space-y-2 p-0">
+            {d?.icon_url && (
+              <Avatar className="p-2">
+                <AvatarImage src={d?.icon_url} alt="@shadcn" />
+                <AvatarFallback>TROPY</AvatarFallback>
+              </Avatar>
+            )}
+            <span className="text-sm font-medium text-center">{d.achievement_name}</span>
+          </div>
+        ))}
+        <Button onClick={handleBackQuiz} variant={'outline'} className="mt-3 w-full">Back To Quiz</Button>
+      </div>
+    )
   }
 
   if (questions?.length == 0) {

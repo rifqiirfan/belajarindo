@@ -25,7 +25,6 @@ export default async function LessonsDatatable({ searchParams }: Omit<PageProps,
   })
 
   const { data, rowCount } = res
-
   return (
     <>
       <ServerResponseHandler

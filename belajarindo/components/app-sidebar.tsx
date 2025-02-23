@@ -123,7 +123,6 @@ const data = {
 const getUserData = async () => {
   try {
     const payload = await validateToken(await getToken())
-    console.log(payload)
     return {
       id: payload.userId,
       name: payload.full_name,
